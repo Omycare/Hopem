@@ -630,7 +630,7 @@
 <div class="slide" id="slide-8">
   <div class="slide-header">
     <h2>📋 Formulaires, Champs &amp; Agents</h2>
-    <span class="sh-badge">3 FORMULAIRES · 45 CHAMPS · 41 AGENTS · 20 MACROS</span>
+    <span class="sh-badge">3 FORMULAIRES · 41 AGENTS · 20 MACROS · 2 CANAUX</span>
   </div>
   <div class="slide-body">
     <div class="grid grid-3" style="gap:14px;">
@@ -696,7 +696,7 @@
       <div>
         <div class="card" style="margin-bottom:10px;">
           <div class="section-label">Agents : 41 actifs <a href="https://hopem-55629.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗</a></div>
-          <table>
+          <table style="margin-bottom:10px;">
             <thead><tr><th>Donnée</th><th>Valeur</th></tr></thead>
             <tbody>
               <tr><td>Agents actifs</td><td><span class="badge badge-green">41</span></td></tr>
@@ -704,23 +704,59 @@
               <tr><td>Marques couvertes</td><td><span class="badge badge-purple">3</span></td></tr>
             </tbody>
           </table>
-          <div style="margin-top:10px;font-size:11px;color:#6B7280;line-height:1.6;">Équipe de taille significative. À vérifier : bonne répartition des agents dans les groupes, présence d'agents inactifs à désactiver, et rôles (agent vs admin) correctement attribués.</div>
+          <div class="section-label" style="font-size:9px;margin-bottom:6px;">Répartition à vérifier</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;">
+              <span style="min-width:120px;color:#374151;">Agents support</span>
+              <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:85%;background:#22C55E;"></div></div>
+              <span style="min-width:24px;color:#9CA3AF;text-align:right;font-size:10px;">~35</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;">
+              <span style="min-width:120px;color:#374151;">Admins / managers</span>
+              <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:12%;background:#F97316;"></div></div>
+              <span style="min-width:24px;color:#9CA3AF;text-align:right;font-size:10px;">~5</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;">
+              <span style="min-width:120px;color:#374151;">Comptes fonctionnels</span>
+              <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:3%;background:#EAB308;"></div></div>
+              <span style="min-width:24px;color:#9CA3AF;text-align:right;font-size:10px;">~1</span>
+            </div>
+          </div>
+          <div class="alert alert-yellow" style="margin-top:10px;margin-bottom:0;">
+            <div class="alert-title" style="font-size:11px;">⚠ Points de vigilance agents</div>
+            <div class="alert-body">Vérifier qu'aucun compte test n'est actif en production, que les agents inactifs sont désactivés (chaque agent inactif consomme une licence), et que les droits admin sont limités au strict nécessaire.</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label">Canaux détectés <a href="https://hopem-55629.zendesk.com/admin/channels/overview" target="_blank" class="zd-link">↗ Canaux</a></div>
+          <table>
+            <thead><tr><th>Canal</th><th>Statut</th></tr></thead>
+            <tbody>
+              <tr><td>📧 Email</td><td><span class="badge badge-green">Principal</span></td></tr>
+              <tr><td>📞 Voix / Téléphone</td><td><span class="badge badge-green">Actif (macros VM)</span></td></tr>
+              <tr><td>💬 Web Widget / Messaging</td><td><span class="badge badge-yellow">À vérifier</span></td></tr>
+              <tr><td>📱 Réseaux sociaux</td><td><span class="badge badge-gray">Non détecté</span></td></tr>
+              <tr><td>💬 Chat en direct</td><td><span class="badge badge-gray">Non détecté</span></td></tr>
+            </tbody>
+          </table>
+          <div class="alert alert-blue" style="margin-top:8px;margin-bottom:0;">
+            <div class="alert-title" style="font-size:11px;">📋 Vérifier la configuration email</div>
+            <div class="alert-body">S'assurer que les enregistrements SPF, DKIM et DMARC sont correctement configurés pour l'adresse support@hopem.ca (ou équivalent). Une mauvaise configuration email réduit la délivrabilité des notifications clients.</div>
+          </div>
         </div>
 
         <div class="card">
-          <div class="section-label">Top tags produits détectés</div>
-          <table>
-            <thead><tr><th>Tag produit</th><th>Tickets</th></tr></thead>
-            <tbody>
-              <tr><td>primmo-gl</td><td style="font-weight:700;color:#7C3AED;">1 914</td></tr>
-              <tr><td>primmo-cf</td><td style="font-weight:700;color:#7C3AED;">1 829</td></tr>
-              <tr><td>primmo-imm</td><td style="font-weight:700;color:#7C3AED;">1 743</td></tr>
-              <tr><td>primmo-cc</td><td style="font-weight:700;">969</td></tr>
-              <tr><td>primmo-app</td><td style="font-weight:700;">844</td></tr>
-              <tr><td>primmo-imc</td><td style="font-weight:700;">809</td></tr>
-            </tbody>
-          </table>
-          <div style="margin-top:8px;font-size:11px;color:#6B7280;">Primmo est de loin le produit le plus supporté. Space et Copernic ont peu de tags visibles : vérifier si leur trafic est correctement taggé.</div>
+          <div class="section-label">Apps installées <a href="https://hopem-55629.zendesk.com/admin/apps-integrations/apps/zendesk-support-apps" target="_blank" class="zd-link">↗ Apps</a></div>
+          <div class="tags" style="margin-bottom:10px;">
+            <span class="tag">Copilot Studio (Microsoft)</span>
+            <span class="tag">MP Dashboard Claude 1</span>
+            <span class="tag">Zendesk AI (natif)</span>
+          </div>
+          <div class="alert alert-yellow" style="margin-bottom:0;">
+            <div class="alert-title" style="font-size:11px;">❓ Liste complète à auditer</div>
+            <div class="alert-body">Vérifier la liste complète dans Admin Center. Désinstaller toute app non utilisée : chaque app consomme des ressources et peut représenter un risque sécurité (accès aux données tickets).</div>
+          </div>
         </div>
       </div>
     </div>
@@ -964,7 +1000,7 @@
 <div class="slide" id="slide-12">
   <div class="slide-header">
     <h2>✅ Résumé &amp; Checklist interactive</h2>
-    <span class="sh-badge">2 CRITIQUES · 5 IMPORTANTS · 4 OPTIMISATIONS</span>
+    <span class="sh-badge">2 CRITIQUES · 7 IMPORTANTS · 6 OPTIMISATIONS</span>
   </div>
   <div class="slide-body">
     <div class="grid grid-2" style="gap:14px;">
@@ -986,6 +1022,8 @@
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Activer les notifications pending 24h et 5 jours</span></div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Réduire Auto Solve de 240 à 45 jours</span></div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Supprimer / archiver les 31 vues inactives</span></div>
+            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Vérifier et corriger la configuration SPF, DKIM, DMARC pour l'adresse email support</span></div>
+            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Auditer les apps installées : désinstaller les apps non utilisées</span></div>
           </div>
         </div>
 
@@ -996,6 +1034,8 @@
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Configurer les Workspaces contextuels par produit</span></div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Clarifier ou renommer le groupe "SP"</span></div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Ajouter articles HC pour Copernic et Abak</span></div>
+            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Ajouter des labels aux articles HC (requis pour le fonctionnement du Copilot AI)</span></div>
+            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Configurer le routage par compétences (Skills-based routing) par niveau et module logiciel</span></div>
           </div>
         </div>
       </div>
