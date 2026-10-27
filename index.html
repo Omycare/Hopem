@@ -173,8 +173,8 @@
 <div class="slide slide-dark active" id="slide-1">
   <div class="cover-centered">
     <div class="cover-pill-new">🔍 Audit Complet · Octobre 2026</div>
-    <h1 style="font-size:clamp(36px,5vw,62px);font-weight:800;line-height:1.05;margin-bottom:6px;color:#fff;">Audit Zendesk</h1>
-    <div style="font-size:clamp(28px,4vw,52px);font-weight:800;color:#C4B5FD;margin-bottom:14px;">Hopem</div>
+    <h1 style="font-size:clamp(36px,5vw,62px);font-weight:800;line-height:1.05;margin-bottom:16px;color:#fff;">Audit Zendesk</h1>
+    <img src="hopemlogo.png" alt="Hopem" style="height:56px;filter:brightness(0) invert(1);opacity:.92;margin-bottom:16px;">
     <p style="font-size:15px;color:rgba(255,255,255,.38);letter-spacing:.5px;">hopem-55629.zendesk.com</p>
     <div class="cstat-row">
       <div class="cstat-item"><div class="cn">41</div><div class="cl">Agents</div></div>
@@ -220,7 +220,7 @@
       <div class="card">
         <div class="section-label">✓ Points forts</div>
         <ul class="check-list">
-          <li>CSAT de <strong>91%</strong> — score remarquable pour un support logiciel B2B</li>
+          <li>CSAT de <strong>91%</strong> : score remarquable pour un support logiciel B2B</li>
           <li>Zendesk AI actif : détection automatique de la langue, intention et sentiment sur chaque ticket</li>
           <li>Architecture multi-brand cohérente : Hopem, Copernic, Praeneste-Space</li>
           <li>Routage produit structuré via triggers dédiés par logiciel (Primmo, Abak, SyMo, ProMenu, Space, Diligence)</li>
@@ -240,7 +240,7 @@
           <li><strong>Formulaire Space inactif</strong> : marque Praeneste-Space active mais son formulaire désactivé</li>
           <li><strong>Notifications pending désactivées</strong> : relances 24h et 5 jours inactives</li>
           <li><strong>Auto-solve à 240 jours</strong> : délai excessif vs standard de 30-60 jours</li>
-          <li><strong>31 vues inactives</strong> sur 62 — dont des vues système Zendesk jamais utilisées</li>
+          <li><strong>31 vues inactives</strong> sur 62 : dont des vues système Zendesk jamais utilisées</li>
         </ul>
 
         <div class="card" style="margin-top:14px;">
@@ -310,7 +310,7 @@
     <div class="alert alert-red">
       <div class="alert-title"><span class="badge badge-red">C1</span> Aucun horaire de travail (Schedule) défini</div>
       <div class="alert-body">
-        Les <strong>schedules (horaires commerciaux) sont absents</strong> du compte. Sans schedule, Zendesk calcule toutes les métriques en continu 24h/7j — un ticket ouvert vendredi soir est mesuré comme si l'équipe travaillait le weekend. Ce problème est un prérequis bloquant : <strong>aucun SLA ne peut fonctionner correctement sans horaire de travail</strong>.
+        Les <strong>schedules (horaires commerciaux) sont absents</strong> du compte. Sans schedule, Zendesk calcule toutes les métriques en continu 24h/7j : un ticket ouvert vendredi soir est mesuré comme si l'équipe travaillait le weekend. Ce problème est un prérequis bloquant : <strong>aucun SLA ne peut fonctionner correctement sans horaire de travail</strong>.
         <br><br>
         Configuration à créer : Admin Center &gt; Objets et règles &gt; Règles métier &gt; Horaires
         <br><br><strong>Action immédiate :</strong> Créer le schedule "Heures ouvrées EST" (Lundi-Vendredi 8h-17h, fuseau Eastern Time / Canada). Ce paramètre prend moins de 5 minutes et débloque toute la mesure de performance.
@@ -364,7 +364,7 @@
     </div>
 
     <div class="alert alert-yellow">
-      <div class="alert-title"><span class="badge badge-yellow">C5</span> Notifications "En attente" désactivées — relances clients absentes
+      <div class="alert-title"><span class="badge badge-yellow">C5</span> Notifications "En attente" désactivées : relances clients absentes
         <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/automations" target="_blank" class="zd-link">↗ Automations</a>
       </div>
       <div class="alert-body">
@@ -374,17 +374,17 @@
     </div>
 
     <div class="alert alert-yellow">
-      <div class="alert-title"><span class="badge badge-yellow">C5</span> Résolution automatique après 240 jours — délai excessif
+      <div class="alert-title"><span class="badge badge-yellow">C5</span> Résolution automatique après 240 jours : délai excessif
         <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/automations" target="_blank" class="zd-link">↗ Automations</a>
       </div>
       <div class="alert-body">
         L'automation <strong>"Auto Solve When Pending after 240 days"</strong> est active avec un délai de <strong>240 jours</strong>. Le standard industrie pour un support logiciel B2B est de 30 à 60 jours. Ce délai maintient des tickets théoriquement résolus dans la file active pendant 8 mois, faussant les métriques de tickets ouverts et alourdissant la file sans utilité réelle.
-        <br><br><strong>Action :</strong> Réduire le délai à 45 jours. Par ailleurs, l'automation "Fermer le billet après 7 jours en attente de retour client" est active et bien calibrée — ces deux règles forment un bon tandem une fois synchronisées.
+        <br><br><strong>Action :</strong> Réduire le délai à 45 jours. Par ailleurs, l'automation "Fermer le billet après 7 jours en attente de retour client" est active et bien calibrée : ces deux règles forment un bon tandem une fois synchronisées.
       </div>
     </div>
 
     <div class="alert alert-yellow">
-      <div class="alert-title"><span class="badge badge-yellow">C6</span> 31 vues inactives sur 62 — interface agents encombrée</div>
+      <div class="alert-title"><span class="badge badge-yellow">C6</span> 31 vues inactives sur 62 : interface agents encombrée</div>
       <div class="alert-body">
         <strong>31 des 62 vues sont inactives</strong>, dont de nombreuses vues système Zendesk par défaut jamais personnalisées (All unsolved tickets, Recently updated tickets, Current tasks, Overdue tasks, Pending tickets, Tickets with pending approvals…). Ces vues encombrent le sélecteur de vues côté agent, complexifient l'onboarding des nouveaux agents et masquent les vues utiles dans un menu trop long.
         <br><br><strong>Action :</strong> Supprimer ou archiver les vues système non utilisées. Créer des vues dédiées par marque (Copernic, Space) pour isoler le trafic multi-brand. Viser 15-20 vues actives maximum.
@@ -456,28 +456,26 @@
 
         <div class="card">
           <div class="section-label">14 Statuts personnalisés</div>
-          <table>
-            <thead><tr><th>Catégorie</th><th>Statut</th><th></th></tr></thead>
-            <tbody>
-              <tr class="tcat"><td colspan="3">NEW</td></tr>
-              <tr><td>New</td><td>À traiter</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr class="tcat"><td colspan="3">OPEN</td></tr>
-              <tr><td>Open</td><td>En cours de traitement</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Open</td><td>Réactivé</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Open</td><td>Client a rappelé</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Open</td><td>À traiter - assigné</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Open</td><td>In Progress</td><td><span class="badge badge-gray">Inactif</span></td></tr>
-              <tr><td>Open</td><td>Facturé</td><td><span class="badge badge-gray">Inactif</span></td></tr>
-              <tr class="tcat"><td colspan="3">PENDING</td></tr>
-              <tr><td>Pending</td><td>En attente retour client</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Pending</td><td>En attente d'approbation</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Pending</td><td>Approuvé, en attente de facturation</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Pending</td><td>Terminé - envoyé en facturation</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr class="tcat"><td colspan="3">SOLVED</td></tr>
-              <tr><td>Solved</td><td>Résolu/Fermé</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Solved</td><td>Facturé - Terminé</td><td><span class="badge badge-green">Actif</span></td></tr>
-            </tbody>
-          </table>
+          <div class="tags" style="margin-bottom:10px;">
+            <span class="tag" style="background:#FEF9C3;border-color:#FDE047;color:#854D0E;">🆕 À traiter</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">En cours de traitement</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">Réactivé</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">Client a rappelé</span>
+            <span class="tag" style="background:#FEE2E2;border-color:#FECACA;color:#991B1B;">À traiter - assigné</span>
+            <span class="tag" style="background:#F3F4F6;color:#6B7280;text-decoration:line-through;">In Progress ⚠ OFF</span>
+            <span class="tag" style="background:#F3F4F6;color:#6B7280;text-decoration:line-through;">Facturé (open) ⚠ OFF</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">En attente retour client</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">En attente d'approbation</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">Approuvé - en attente facturation</span>
+            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">Terminé - envoyé en facturation</span>
+            <span class="tag" style="background:#1F2937;border-color:#374151;color:#F9FAFB;">En suspens</span>
+            <span class="tag" style="background:#F3F4F6;border-color:#D1D5DB;color:#6B7280;">Résolu/Fermé</span>
+            <span class="tag" style="background:#F3F4F6;border-color:#D1D5DB;color:#6B7280;">Facturé - Terminé</span>
+          </div>
+          <div class="alert alert-indigo" style="margin-bottom:0;">
+            <div class="alert-title">💡 Statuts Pending : impact sur le SLA</div>
+            <div class="alert-body">Les statuts mappés sur "En attente" (Pending) <strong>mettent le SLA en pause</strong> une fois les SLA activés. S'assurer que "En attente d'approbation", "Approuvé en attente facturation" et "Terminé envoyé en facturation" sont bien catégorisés pour éviter des effets involontaires sur les métriques.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -503,7 +501,7 @@
         </div>
 
         <div class="alert alert-blue">
-          <div class="alert-title">📋 Configuration recommandée — Schedule</div>
+          <div class="alert-title">📋 Configuration recommandée : Schedule</div>
           <div class="alert-body">
             <table>
               <thead><tr><th>Plage</th><th>Horaire recommandé</th></tr></thead>
@@ -528,10 +526,10 @@
                 <tr><td><span class="badge badge-red">Urgent</span></td><td style="color:#166534;font-weight:600;">1h</td><td>2h</td><td>4h</td></tr>
                 <tr><td><span class="badge badge-orange">Élevé</span></td><td style="color:#166534;font-weight:600;">4h</td><td>8h</td><td>24h</td></tr>
                 <tr><td><span class="badge badge-yellow">Normal</span></td><td style="color:#166534;font-weight:600;">8h</td><td>16h</td><td>48h</td></tr>
-                <tr><td><span class="badge badge-gray">Faible</span></td><td style="color:#166534;font-weight:600;">24h</td><td>—</td><td>96h</td></tr>
+                <tr><td><span class="badge badge-gray">Faible</span></td><td style="color:#166534;font-weight:600;">24h</td><td>:</td><td>96h</td></tr>
               </tbody>
             </table>
-            <br>Toutes les métriques doivent utiliser les horaires commerciaux (business hours) — à activer uniquement après création du schedule.
+            <br>Toutes les métriques doivent utiliser les horaires commerciaux (business hours) : à activer uniquement après création du schedule.
             <br><br><em>* Ajuster selon les contrats de support existants avec les clients Hopem.</em>
           </div>
         </div>
@@ -539,7 +537,7 @@
         <div class="alert alert-indigo" style="margin-top:10px;">
           <div class="alert-title">💡 Recommandation : une politique SLA générale</div>
           <div class="alert-body">
-            Créer une seule politique SLA générale applicable à tous les tickets, puis des exceptions spécifiques par produit si les contrats le nécessitent. Cette approche simplifie la maintenance et garantit qu'aucun ticket ne passe au travers sans SLA applicable — contrairement à l'approche organisation par organisation.
+            Créer une seule politique SLA générale applicable à tous les tickets, puis des exceptions spécifiques par produit si les contrats le nécessitent. Cette approche simplifie la maintenance et garantit qu'aucun ticket ne passe au travers sans SLA applicable : contrairement à l'approche organisation par organisation.
           </div>
         </div>
       </div>
@@ -654,7 +652,7 @@
         </div>
 
         <div class="card">
-          <div class="section-label">Macros — 20 <a href="https://hopem-55629.zendesk.com/admin/workspaces/agent-workspace/macros" target="_blank" class="zd-link">↗</a></div>
+          <div class="section-label">Macros : 20 <a href="https://hopem-55629.zendesk.com/admin/workspaces/agent-workspace/macros" target="_blank" class="zd-link">↗</a></div>
           <div style="display:flex;gap:5px;margin-bottom:10px;"><span class="badge badge-green">20 actives</span><span class="badge badge-gray">0 inactives</span></div>
           <table>
             <thead><tr><th>Macro</th></tr></thead>
@@ -675,7 +673,7 @@
 
       <div>
         <div class="card">
-          <div class="section-label">Champs IA — Tagger fields (Zendesk AI)</div>
+          <div class="section-label">Champs IA : Tagger fields (Zendesk AI)</div>
           <table>
             <thead><tr><th>Champ</th><th>Usage</th></tr></thead>
             <tbody>
@@ -697,7 +695,7 @@
 
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">Agents — 41 actifs <a href="https://hopem-55629.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗</a></div>
+          <div class="section-label">Agents : 41 actifs <a href="https://hopem-55629.zendesk.com/admin/people/team/members" target="_blank" class="zd-link">↗</a></div>
           <table>
             <thead><tr><th>Donnée</th><th>Valeur</th></tr></thead>
             <tbody>
@@ -722,7 +720,7 @@
               <tr><td>primmo-imc</td><td style="font-weight:700;">809</td></tr>
             </tbody>
           </table>
-          <div style="margin-top:8px;font-size:11px;color:#6B7280;">Primmo est de loin le produit le plus supporté. Space et Copernic ont peu de tags visibles — vérifier si leur trafic est correctement taggé.</div>
+          <div style="margin-top:8px;font-size:11px;color:#6B7280;">Primmo est de loin le produit le plus supporté. Space et Copernic ont peu de tags visibles : vérifier si leur trafic est correctement taggé.</div>
         </div>
       </div>
     </div>
@@ -744,20 +742,20 @@
             <div style="display:flex;gap:5px;"><span class="badge badge-green">62 articles</span><span class="badge badge-blue">2 catégories</span></div>
           </div>
           <table>
-            <thead><tr><th>Catégorie</th><th>Contenu</th></tr></thead>
+            <thead><tr><th>Indicateur</th><th>Valeur</th><th>Évaluation</th></tr></thead>
             <tbody>
-              <tr><td>📂 Logiciel HOPEM PRIMMO</td><td>Articles sur les modules Primmo (GL, CF, IMM…)</td></tr>
-              <tr><td>📂 Logiciel SPACE</td><td>Articles sur le logiciel Praeneste-Space</td></tr>
+              <tr><td>Articles total</td><td>62</td><td><span class="badge badge-green">Bon démarrage</span></td></tr>
+              <tr><td>Catégories</td><td>2 (Primmo, Space)</td><td><span class="badge badge-yellow">Incomplet</span></td></tr>
+              <tr><td>Copernic couvert</td><td>Non</td><td><span class="badge badge-red">Manquant</span></td></tr>
+              <tr><td>Abak couvert</td><td>Non</td><td><span class="badge badge-red">Manquant</span></td></tr>
+              <tr><td>Labels sur articles</td><td>À vérifier</td><td><span class="badge badge-yellow">Requis pour Copilot</span></td></tr>
+              <tr><td>Commentaires articles</td><td>À vérifier</td><td><span class="badge badge-yellow">Risque modération</span></td></tr>
+              <tr><td>Generative Search IA</td><td>À activer</td><td><span class="badge badge-blue">Opportunité</span></td></tr>
             </tbody>
           </table>
-          <ul class="check-list" style="margin-top:10px;">
-            <li>Help Center en place pour les 2 produits principaux</li>
-            <li>62 articles — volume raisonnable pour un démarrage</li>
-          </ul>
-          <ul class="check-list warn-list" style="margin-top:6px;">
-            <li>Aucune catégorie pour Copernic ni Abak</li>
-            <li>Vérifier si les articles sont liés aux tickets fréquents (suggestions automatiques Copilot)</li>
-            <li>Activer la recherche IA (Generative Search) pour déflexion des tickets courants</li>
+          <ul class="check-list warn-list" style="margin-top:10px;">
+            <li>Vérifier que les articles ont des labels : sans labels, Copilot ne peut pas les suggérer automatiquement</li>
+            <li>Certains articles contiennent principalement des captures d'écran sans texte, l'IA ne peut pas lire les images</li>
           </ul>
         </div>
 
@@ -771,7 +769,7 @@
 
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">Zendesk AI — Tri intelligent actif</div>
+          <div class="section-label">Zendesk AI : Tri intelligent actif</div>
           <table>
             <thead><tr><th>Tag IA détecté</th><th>Occurrences</th><th>Signal</th></tr></thead>
             <tbody>
@@ -790,8 +788,8 @@
           <table>
             <thead><tr><th>Intégration</th><th>Statut</th></tr></thead>
             <tbody>
-              <tr><td>Zendesk AI — Tri intelligent (langue, sentiment, intention)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
-              <tr><td>Copilot Studio — Agent billets (Microsoft)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
+              <tr><td>Zendesk AI : Tri intelligent (langue, sentiment, intention)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
+              <tr><td>Copilot Studio : Agent billets (Microsoft)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>MP Dashboard Claude 1</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>[GenAI] Rappel automatique</td><td><span class="badge badge-red">Inactif ⚠</span></td></tr>
               <tr><td>[GenAI] Résolution automatique</td><td><span class="badge badge-red">Inactif ⚠</span></td></tr>
@@ -799,7 +797,7 @@
           </table>
           <div class="alert alert-orange" style="margin-top:10px;">
             <div class="alert-title">⚠ L'IA collecte mais n'agit pas encore</div>
-            <div class="alert-body">Le tri IA enrichit chaque ticket avec des données de qualité (langue, sentiment, intention), mais les automations GenAI qui devraient agir sur ces données sont désactivées. C'est comme avoir un tableau de bord sans volant — activer les automations est la prochaine étape logique.</div>
+            <div class="alert-body">Le tri IA enrichit chaque ticket avec des données de qualité (langue, sentiment, intention), mais les automations GenAI qui devraient agir sur ces données sont désactivées. C'est comme avoir un tableau de bord sans volant : activer les automations est la prochaine étape logique.</div>
           </div>
         </div>
       </div>
@@ -817,16 +815,16 @@
     <div class="grid grid-4" style="gap:14px;">
       <div>
         <div class="card" style="border-top:3px solid #EF4444;">
-          <div class="section-label" style="color:#EF4444;">🔴 Semaine 1 — Critique</div>
+          <div class="section-label" style="color:#EF4444;">🔴 Semaine 1 : Critique</div>
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
             <div class="alert alert-red" style="margin-bottom:0;">
               <div class="alert-body"><strong>S1.1</strong> Créer le schedule "Heures ouvrées EST" dans Admin Center (Lun-Ven 8h-17h)</div>
             </div>
             <div class="alert alert-red" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S1.2</strong> Créer 2 politiques SLA minimum (Urgent : 1h/4h — Normal : 8h/48h) liées au schedule</div>
+              <div class="alert-body"><strong>S1.2</strong> Créer 2 politiques SLA minimum (Urgent : 1h/4h : Normal : 8h/48h) liées au schedule</div>
             </div>
             <div class="alert alert-red" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S1.3</strong> Activer les automations GenAI — Rappel et Résolution — et vérifier leurs conditions de déclenchement</div>
+              <div class="alert-body"><strong>S1.3</strong> Activer les automations GenAI : Rappel et Résolution : et vérifier leurs conditions de déclenchement</div>
             </div>
           </div>
         </div>
@@ -834,7 +832,7 @@
 
       <div>
         <div class="card" style="border-top:3px solid #F97316;">
-          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 — Important</div>
+          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 : Important</div>
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
             <div class="alert alert-orange" style="margin-bottom:0;">
               <div class="alert-body"><strong>S2.1</strong> Activer le formulaire Space et ajouter les champs spécifiques au produit Praeneste</div>
@@ -854,7 +852,7 @@
 
       <div>
         <div class="card" style="border-top:3px solid #3B82F6;">
-          <div class="section-label" style="color:#3B82F6;">🔵 Mois 1 — Optimisation</div>
+          <div class="section-label" style="color:#3B82F6;">🔵 Mois 1 : Optimisation</div>
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
             <div class="alert alert-blue" style="margin-bottom:0;">
               <div class="alert-body"><strong>M1.1</strong> Nettoyer les 31 vues inactives, archiver les vues système non utilisées</div>
@@ -874,13 +872,13 @@
 
       <div>
         <div class="card" style="border-top:3px solid #8B5CF6;">
-          <div class="section-label" style="color:#8B5CF6;">🟣 Trimestre 1 — Croissance</div>
+          <div class="section-label" style="color:#8B5CF6;">🟣 Trimestre 1 : Croissance</div>
           <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
             <div class="alert alert-indigo" style="margin-bottom:0;">
               <div class="alert-body"><strong>T1.1</strong> Entraîner les modèles d'intention IA (intent confidence trop souvent "low")</div>
             </div>
             <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-body"><strong>T1.2</strong> Configurer le routage basé sur les compétences (Skills-based routing — 0 attributs actuellement)</div>
+              <div class="alert-body"><strong>T1.2</strong> Configurer le routage basé sur les compétences (Skills-based routing : 0 attributs actuellement)</div>
             </div>
             <div class="alert alert-indigo" style="margin-bottom:0;">
               <div class="alert-body"><strong>T1.3</strong> Ajouter des articles HC pour Copernic et Abak</div>
@@ -921,7 +919,7 @@
         </div>
 
         <div class="card">
-          <div class="section-label">CSAT — Capital à exploiter</div>
+          <div class="section-label">CSAT : Capital à exploiter</div>
           <div style="text-align:center;padding:16px 0;">
             <div style="font-size:48px;font-weight:800;color:#22C55E;">91%</div>
             <div style="font-size:12px;color:#6B7280;margin-top:4px;">1 782 avis positifs · 178 négatifs</div>
@@ -940,7 +938,7 @@
               <div class="alert-body">Activer les automations IA pour résoudre automatiquement les demandes simples (réinitialisations, demandes de documentation, FAQ). Potentiel : réduire le volume humain de 15-25% sur les tickets Primmo courants.</div>
             </div>
             <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-title">🚀 Self-service HC — déflexion intelligente</div>
+              <div class="alert-title">🚀 Self-service HC : déflexion intelligente</div>
               <div class="alert-body">Avec 62 articles et le tri IA actif, activer la suggestion automatique d'articles avant soumission de ticket. Le Help Center peut absorber les demandes de type "comment utiliser Primmo-GL" sans intervention agent.</div>
             </div>
             <div class="alert alert-indigo" style="margin-bottom:0;">
@@ -972,16 +970,16 @@
     <div class="grid grid-2" style="gap:14px;">
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#EF4444;">Actions critiques — à faire cette semaine</div>
+          <div class="section-label" style="color:#EF4444;">Actions critiques : à faire cette semaine</div>
           <div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer le schedule "Heures ouvrées EST" Lundi-Vendredi 8h-17h</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer les politiques SLA (Urgent : 1h réponse / 4h résolution — Normal : 8h / 48h)</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Activer les automations GenAI — Rappel et Résolution automatique par IA</span></div>
+            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer les politiques SLA (Urgent : 1h réponse / 4h résolution : Normal : 8h / 48h)</span></div>
+            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Activer les automations GenAI : Rappel et Résolution automatique par IA</span></div>
           </div>
         </div>
 
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#F97316;">Actions importantes — semaines 1-2</div>
+          <div class="section-label" style="color:#F97316;">Actions importantes : semaines 1-2</div>
           <div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Activer le formulaire Space + ajouter champs produit Praeneste</span></div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Recalibrer les critères de priorité pour ramener Urgent/High &lt;15%</span></div>
@@ -992,7 +990,7 @@
         </div>
 
         <div class="card">
-          <div class="section-label" style="color:#3B82F6;">Optimisations — mois 1</div>
+          <div class="section-label" style="color:#3B82F6;">Optimisations : mois 1</div>
           <div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer des vues dédiées par marque (Copernic, Space)</span></div>
             <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Configurer les Workspaces contextuels par produit</span></div>
@@ -1006,13 +1004,13 @@
         <div class="card" style="margin-bottom:10px;">
           <div class="section-label" style="color:#22C55E;">Points forts à préserver</div>
           <ul class="check-list">
-            <li>CSAT 91% — score remarquable, à protéger et monitorer</li>
+            <li>CSAT 91% : score remarquable, à protéger et monitorer</li>
             <li>Zendesk AI actif : tri langue, sentiment, intention opérationnel</li>
             <li>Architecture multi-brand cohérente (3 marques)</li>
             <li>Routage produit structuré via triggers dédiés</li>
             <li>14 statuts personnalisés reflétant le workflow facturation</li>
             <li>20 macros toutes actives, bibliothèque propre</li>
-            <li>Help Center en place — 62 articles sur Primmo et Space</li>
+            <li>Help Center en place : 62 articles sur Primmo et Space</li>
             <li>Intégration Copilot Studio opérationnelle</li>
           </ul>
         </div>
@@ -1034,7 +1032,7 @@
 <!-- ══ SLIDE 13 : DASHBOARD KPI ══ -->
 <div class="slide" id="slide-13">
   <div class="slide-header">
-    <h2>📈 Dashboard KPI — Données réelles API</h2>
+    <h2>📈 Dashboard KPI : Données réelles API</h2>
     <span class="sh-badge">12 159 TICKETS · CSAT 91% · 37% URGENT+HIGH</span>
   </div>
   <div class="slide-body">
@@ -1231,7 +1229,7 @@
         <img src="omycarelogo.png" alt="OmyCare" style="height:30px;opacity:.9;">
       </a>
       <div style="width:1px;height:30px;background:rgba(255,255,255,.2);"></div>
-      <span style="font-size:20px;font-weight:800;color:#C4B5FD;">Hopem</span>
+      <img src="hopemlogo.png" alt="Hopem" style="height:28px;filter:brightness(0) invert(1);opacity:.9;">
     </div>
     <p style="max-width:700px;font-size:15px;line-height:2;color:rgba(255,255,255,.6);margin-bottom:0;">
       Ce rapport est la base de travail pour optimiser votre compte Zendesk.<br>
