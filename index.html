@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Zendesk — Hopem</title>
+<style>
+:root {
+  --bg: #0F0A1E;
+  --bg2: #200B3E;
+  --purple: #8B5CF6;
+  --purple-light: #C4B5FD;
+  --purple-dark: #6D28D9;
+  --text: #E5E7EB;
+  --text-dim: #9CA3AF;
+  --green: #10B981;
+  --red: #EF4444;
+  --orange: #F59E0B;
+  --blue: #3B82F6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+
+.logo-fixed {
+  position: fixed; top: 18px; left: 22px; z-index: 200; height: 32px; pointer-events: auto;
+}
+.logo-fixed img { height: 32px; }
+
+.deck { width: 100%; height: 100vh; }
+.slide {
+  display: none; width: 100%; height: 100vh;
+  background: linear-gradient(135deg, #0F0A1E 0%, #200B3E 50%, #3D1B6E 100%);
+  overflow-y: auto; padding: 64px 48px 48px; position: relative;
+}
+.slide.active { display: flex; flex-direction: column; }
+
+/* NAV DOTS */
+.nav-dots {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 100;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(139,92,246,0.3); cursor: pointer; transition: all .2s;
+}
+.dot.active { background: var(--purple); transform: scale(1.3); }
+
+/* NAV ARROWS */
+.nav-arrow {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.3);
+  color: var(--purple-light); font-size: 20px; width: 40px; height: 40px;
+  border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  z-index: 100; transition: all .2s;
+}
+.nav-arrow:hover { background: rgba(139,92,246,0.4); }
+.nav-prev { left: 12px; }
+.nav-next { right: 12px; }
+
+/* COVER */
+.cover-centered {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; min-height: calc(100vh - 112px); gap: 20px;
+}
+.cover-pill-new {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4);
+  color: var(--purple-light); font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+  padding: 6px 16px; border-radius: 20px; text-transform: uppercase;
+}
+.cover-h1 { font-size: clamp(32px,5vw,60px); font-weight: 700; color: white; line-height: 1.15; }
+.cover-h1 span { color: var(--purple-light); }
+.cover-sub { color: var(--text-dim); font-size: 15px; }
+.cstat-row {
+  display: flex; align-items: center; gap: 0; margin-top: 8px;
+  background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.2); border-radius: 12px;
+  overflow: hidden; flex-wrap: wrap;
+}
+.cstat-item {
+  padding: 14px 28px; text-align: center;
+  border-right: 1px solid rgba(139,92,246,0.2);
+}
+.cstat-item:last-child { border-right: none; }
+.cn { font-size: 28px; font-weight: 700; color: var(--purple-light); }
+.cl { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+.badge-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  letter-spacing: .5px; text-transform: uppercase;
+}
+.badge-red { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4); color: #FCA5A5; }
+.badge-orange { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); color: #FCD34D; }
+.badge-green { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); color: #6EE7B7; }
+.badge-blue { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.4); color: #93C5FD; }
+.badge-purple { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); color: var(--purple-light); }
+
+/* SLIDE HEADER */
+.slide-header { margin-bottom: 28px; }
+.slide-num { font-size: 11px; color: var(--purple); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; }
+.slide-title { font-size: clamp(22px,3vw,34px); font-weight: 700; color: white; }
+.slide-title span { color: var(--purple-light); }
+
+/* CARDS */
+.card-grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.card {
+  background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.2);
+  border-radius: 12px; padding: 20px;
+}
+.card-title { font-size: 13px; color: var(--purple-light); font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+
+/* URGENCY ITEMS */
+.urgency-item {
+  background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.15);
+  border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; display: flex; gap: 16px;
+}
+.urgency-item.c1 { border-left: 4px solid var(--red); }
+.urgency-item.c2 { border-left: 4px solid var(--orange); }
+.urgency-item.c3 { border-left: 4px solid var(--blue); }
+.urgency-item.c4 { border-left: 4px solid #6366F1; }
+.urgency-item.c5 { border-left: 4px solid var(--purple); }
+.urgency-item.c6 { border-left: 4px solid var(--text-dim); }
+.u-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; height: fit-content; margin-top: 2px; }
+.u-c1 { background: rgba(239,68,68,0.2); color: #FCA5A5; }
+.u-c2 { background: rgba(245,158,11,0.2); color: #FCD34D; }
+.u-c3 { background: rgba(59,130,246,0.2); color: #93C5FD; }
+.u-c4 { background: rgba(99,102,241,0.2); color: #A5B4FC; }
+.u-c5 { background: rgba(139,92,246,0.2); color: var(--purple-light); }
+.u-c6 { background: rgba(156,163,175,0.2); color: #D1D5DB; }
+.u-content h3 { font-size: 15px; font-weight: 600; color: white; margin-bottom: 4px; }
+.u-content p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.u-content strong { color: var(--text); }
+
+/* TABLE */
+.zt { width: 100%; border-collapse: collapse; font-size: 13px; }
+.zt th { text-align: left; padding: 8px 12px; color: var(--purple-light); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid rgba(139,92,246,0.2); }
+.zt td { padding: 8px 12px; border-bottom: 1px solid rgba(139,92,246,0.08); color: var(--text); }
+.zt tr:last-child td { border-bottom: none; }
+.zt tr:hover td { background: rgba(139,92,246,0.05); }
+
+/* STATUS DOT */
+.dot-green { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-right: 6px; }
+.dot-red { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); margin-right: 6px; }
+.dot-orange { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); margin-right: 6px; }
+
+/* KPI CARDS */
+.kpi-card {
+  background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.25);
+  border-radius: 12px; padding: 18px; text-align: center;
+}
+.kpi-num { font-size: 36px; font-weight: 800; color: var(--purple-light); }
+.kpi-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+/* BAR */
+.bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.bar-label { font-size: 12px; color: var(--text-dim); width: 130px; flex-shrink: 0; }
+.bar-track { flex: 1; height: 8px; background: rgba(139,92,246,0.15); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width .6s ease; }
+.bar-val { font-size: 12px; color: var(--text); width: 50px; text-align: right; }
+
+/* SVG DONUT */
+.donut-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.donut-legend { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.donut-leg-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.donut-leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* CHECKLIST */
+.check-col { display: flex; flex-direction: column; gap: 8px; }
+.check-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.5; }
+.check-icon { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+
+/* MERCI */
+.merci-logos { display: flex; align-items: center; gap: 32px; justify-content: center; margin: 16px 0; }
+.merci-sep { width: 1px; height: 40px; background: rgba(139,92,246,0.3); }
+.merci-info { display: flex; gap: 0; justify-content: center; margin: 16px 0; border: 1px solid rgba(139,92,246,0.2); border-radius: 10px; overflow: hidden; }
+.merci-info-col { padding: 14px 32px; text-align: center; border-right: 1px solid rgba(139,92,246,0.2); }
+.merci-info-col:last-child { border-right: none; }
+.merci-info-col .label { font-size: 10px; color: var(--purple-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.merci-info-col .val { font-size: 13px; color: var(--text); }
+.next-box {
+  background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.3);
+  border-radius: 10px; padding: 16px 24px; max-width: 600px; text-align: center;
+  font-size: 14px; color: var(--text); line-height: 1.7;
+}
+
+/* PLAN */
+.plan-col { display: flex; flex-direction: column; gap: 8px; }
+.plan-item {
+  background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.15);
+  border-radius: 8px; padding: 10px 14px; font-size: 12px; line-height: 1.5;
+}
+.plan-item strong { color: var(--purple-light); display: block; font-size: 11px; margin-bottom: 3px; }
+
+.tag-pill {
+  display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px;
+  background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); color: var(--purple-light);
+  margin: 2px;
+}
+
+.section-label {
+  font-size: 11px; color: var(--purple); text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 8px; margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 72px 20px 60px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .cstat-row { flex-direction: column; }
+  .cstat-item { border-right: none; border-bottom: 1px solid rgba(139,92,246,0.2); }
+  .merci-info { flex-direction: column; }
+  .merci-info-col { border-right: none; border-bottom: 1px solid rgba(139,92,246,0.2); }
+}
+</style>
+</head>
+<body>
+
+<a href="https://omycare.fr/" target="_blank" rel="noopener" class="logo-fixed" id="logo-fixed">
+  <img src="omycarelogo.png" alt="OmyCare">
+</a>
+
+<button class="nav-arrow nav-prev" onclick="navigate(-1)">&#8592;</button>
+<button class="nav-arrow nav-next" onclick="navigate(1)">&#8594;</button>
+
+<div class="nav-dots" id="nav-dots"></div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: COVER -->
+<div class="slide active" id="slide-0">
+  <div class="cover-centered">
+    <div class="cover-pill-new">🔍 AUDIT COMPLET &nbsp;·&nbsp; OCTOBRE 2026</div>
+    <div class="cover-h1">Audit Zendesk<br><span>Hopem</span></div>
+    <div class="cover-sub">hopem-55629.zendesk.com &nbsp;·&nbsp; Compte créé : Septembre 2025</div>
+    <div class="cstat-row">
+      <div class="cstat-item"><div class="cn">41</div><div class="cl">Agents</div></div>
+      <div class="cstat-item"><div class="cn">12 159</div><div class="cl">Tickets total</div></div>
+      <div class="cstat-item"><div class="cn">91%</div><div class="cl">CSAT</div></div>
+      <div class="cstat-item"><div class="cn">3</div><div class="cl">Marques</div></div>
+      <div class="cstat-item"><div class="cn">62</div><div class="cl">Articles HC</div></div>
+      <div class="cstat-item"><div class="cn">56</div><div class="cl">Triggers</div></div>
+    </div>
+    <div class="badge-row">
+      <span class="badge badge-red">🔴 2 Urgences critiques</span>
+      <span class="badge badge-orange">🟡 5 Points importants</span>
+      <span class="badge badge-green">✅ CSAT 91%</span>
+      <span class="badge badge-blue">🤖 Zendesk AI actif</span>
+      <span class="badge badge-purple">🏷️ 3 Marques configurées</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: VUE D'ENSEMBLE -->
+<div class="slide" id="slide-1">
+  <div class="slide-header">
+    <div class="slide-num">02 / 14</div>
+    <div class="slide-title">Vue d'<span>ensemble</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1; align-content:start;">
+    <div>
+      <div class="card-grid grid-2">
+        <div class="kpi-card"><div class="kpi-num">41</div><div class="kpi-label">Agents actifs</div></div>
+        <div class="kpi-card"><div class="kpi-num">9</div><div class="kpi-label">Groupes</div></div>
+        <div class="kpi-card"><div class="kpi-num">3</div><div class="kpi-label">Marques</div></div>
+        <div class="kpi-card"><div class="kpi-num">184</div><div class="kpi-label">Tickets actifs</div></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Marques (Multi-brand)</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <div style="display:flex;align-items:center;gap:10px;"><span class="badge badge-green">Actif</span> <span style="font-size:13px;">Hopem (hopem-55629)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span class="badge badge-green">Actif</span> <span style="font-size:13px;">Copernic (copernic-26)</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span class="badge badge-green">Actif</span> <span style="font-size:13px;">Praeneste - Logiciel Space</span></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Groupes de support</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          <span class="tag-pill">Administration</span>
+          <span class="tag-pill">Assistance</span>
+          <span class="tag-pill">Info Client</span>
+          <span class="tag-pill">Service Client</span>
+          <span class="tag-pill">SP</span>
+          <span class="tag-pill">Support Applicatif</span>
+          <span class="tag-pill">Support R&D</span>
+          <span class="tag-pill">Support Technique</span>
+          <span class="tag-pill">Ventes</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Points forts</div>
+        <div class="check-col" style="margin-top:8px;">
+          <div class="check-item"><span class="check-icon">✅</span><span>CSAT de <strong>91%</strong> — excellent pour un support B2B logiciel</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Zendesk AI actif : tri intelligent, sentiment, intention, langue détectés automatiquement</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Architecture multi-brand cohérente (Hopem, Copernic, Space)</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Routage produit structuré via triggers dédiés par logiciel (Primmo, Abak, SyMo, ProMenu…)</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Statuts personnalisés riches (14 statuts) reflétant un workflow facturation/approbation</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>20 macros actives, bien organisées pour réponses rapides</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Help Center en place : 62 articles répartis sur 2 produits (Primmo, Space)</span></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Points à corriger</div>
+        <div class="check-col" style="margin-top:8px;">
+          <div class="check-item"><span class="check-icon">🔴</span><span>Aucune politique SLA configurée — risque de non-respect des engagements</span></div>
+          <div class="check-item"><span class="check-icon">🔴</span><span>Aucun horaire de travail défini — SLA et rapports non calibrés sur les heures ouvrées</span></div>
+          <div class="check-item"><span class="check-icon">🟡</span><span>Automations GenAI inactives — fonctionnalités IA payées mais non exploitées</span></div>
+          <div class="check-item"><span class="check-icon">🟡</span><span>37% des tickets en priorité Urgent/High — possible surclassement automatique</span></div>
+          <div class="check-item"><span class="check-icon">🟡</span><span>Résolution automatique après 240 jours — délai excessif vs standard 30-60 jours</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: URGENCES CRITIQUES -->
+<div class="slide" id="slide-2">
+  <div class="slide-header">
+    <div class="slide-num">03 / 14</div>
+    <div class="slide-title">Urgences <span>critiques</span></div>
+  </div>
+  <div style="flex:1;">
+    <div class="urgency-item c1">
+      <span class="u-badge u-c1">C1</span>
+      <div class="u-content">
+        <h3>Aucune politique SLA configurée</h3>
+        <p>L'espace Zendesk ne contient <strong>aucun SLA (Service Level Agreement)</strong>. Pour une entreprise B2B gérant 41 agents et trois produits, l'absence de SLA empêche de mesurer les temps de première réponse et de résolution, de tenir des engagements contractuels avec les clients, et de piloter la performance des équipes. Les rapports de performance sont donc inexploitables par rapport aux objectifs réels.</p>
+      </div>
+    </div>
+    <div class="urgency-item c1">
+      <span class="u-badge u-c1">C1</span>
+      <div class="u-content">
+        <h3>Aucun horaire de travail (Schedule) défini</h3>
+        <p>Les <strong>horaires de travail sont absents</strong> du compte. Sans schedule, Zendesk calcule les métriques SLA en temps réel 24h/24, ce qui biaise les rapports (un ticket ouvert vendredi soir est mesuré comme si l'équipe travaillait le week-end). C'est un prérequis indispensable avant d'activer tout SLA. Cette configuration prend moins de 10 minutes et débloque l'ensemble de la mesure de performance.</p>
+      </div>
+    </div>
+    <div class="urgency-item c2">
+      <span class="u-badge u-c2">C2</span>
+      <div class="u-content">
+        <h3>Automations GenAI créées mais inactives</h3>
+        <p>Deux automations liées à l'IA générative existent dans le compte — <strong>[GenAI] Rappel via réponse automatique</strong> et <strong>[GenAI] Résolution via réponse automatique</strong> — mais sont toutes deux <strong>désactivées</strong>. Ces fonctionnalités font probablement partie du plan souscrit. Leur non-activation représente un coût d'opportunité : réduction du volume de tickets simples traités manuellement, délai de résolution accéléré pour les cas courants, et amélioration du CSAT déjà bon (91%).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: POINTS IMPORTANTS -->
+<div class="slide" id="slide-3">
+  <div class="slide-header">
+    <div class="slide-num">04 / 14</div>
+    <div class="slide-title">Points <span>importants</span></div>
+  </div>
+  <div style="flex:1;">
+    <div class="urgency-item c4">
+      <span class="u-badge u-c4">C4</span>
+      <div class="u-content">
+        <h3>Taux de priorité Urgent/High anormalement élevé (37%)</h3>
+        <p><strong>2 456 tickets urgents et 2 000 tickets high</strong> sur 12 159 total représentent 37% en priorité critique. En support logiciel B2B, un taux sain est de 10-15% maximum. Ce surclassement peut provenir du tri automatique par l'IA ou de règles métier imprécises. Il dilue l'attention des agents sur les vraies urgences et produit des rapports de priorité non représentatifs. Une révision des critères de priorité ou des triggers d'assignation s'impose.</p>
+      </div>
+    </div>
+    <div class="urgency-item c4">
+      <span class="u-badge u-c4">C4</span>
+      <div class="u-content">
+        <h3>Formulaire "Espace Space" inactif malgré une marque active</h3>
+        <p>La marque <strong>Praeneste - Logiciel Space</strong> est active, mais le <strong>formulaire de ticket Space est désactivé</strong>. Les clients de ce produit utilisent probablement le formulaire Hopem par défaut, sans champs spécifiques à Space. Cela nuit à la qualité des données collectées et au routage automatique vers les équipes concernées.</p>
+      </div>
+    </div>
+    <div class="urgency-item c5">
+      <span class="u-badge u-c5">C5</span>
+      <div class="u-content">
+        <h3>Notifications d'attente inactive — relances clients non envoyées</h3>
+        <p>Les automations <strong>"Notification de demande en attente depuis 24 heures"</strong> et <strong>"depuis 5 jours"</strong> sont désactivées. Sans ces relances, les tickets en statut Pending ne génèrent aucune notification proactive. Le risque : des tickets oubliés en attente sans retour client, alourdissant la file active inutilement. Ces automations sont préconfigurées et prêtes à activer en un clic.</p>
+      </div>
+    </div>
+    <div class="urgency-item c5">
+      <span class="u-badge u-c5">C5</span>
+      <div class="u-content">
+        <h3>Résolution automatique après 240 jours — délai excessif</h3>
+        <p>L'automation <strong>"Auto Solve When Pending after 240 days"</strong> est active avec un délai de 240 jours. Le standard industrie est 30 à 60 jours. Ce délai excessif maintient des tickets théoriquement résolus dans la file active pendant 8 mois, faussant les métriques et alourdie le volume apparent en cours.</p>
+      </div>
+    </div>
+    <div class="urgency-item c6">
+      <span class="u-badge u-c6">C6</span>
+      <div class="u-content">
+        <h3>31 vues inactives / système non nettoyées</h3>
+        <p><strong>31 des 62 vues sont inactives</strong>, dont plusieurs vues système par défaut de Zendesk (All unsolved tickets, Recently updated, Current tasks…). Ces vues encombrent l'interface agents sans utilité. Un nettoyage des vues améliore la clarté de l'espace de travail des agents et réduit la confusion lors de l'onboarding de nouveaux agents.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: TRIGGERS & AUTOMATIONS -->
+<div class="slide" id="slide-4">
+  <div class="slide-header">
+    <div class="slide-num">05 / 14</div>
+    <div class="slide-title">Triggers &amp; <span>Automations</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1;align-content:start;">
+    <div>
+      <div class="card">
+        <div class="card-title">Triggers — 56 au total</div>
+        <div class="card-grid grid-2" style="margin:10px 0 14px;">
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;">46</div><div class="cl">Actifs</div></div>
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;color:#EF4444;">10</div><div class="cl">Inactifs</div></div>
+        </div>
+        <div class="section-label">Logique de routage produit</div>
+        <table class="zt">
+          <tr><th>Trigger</th><th>Statut</th></tr>
+          <tr><td>Route Assistance Technique + Abak</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Route Assistance Technique + Primmo</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Route Assistance Technique + ProMenu</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Route Assistance Technique + SyMo</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Route Assistance Technique + Space</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Route Assistance Logiciels + Abak</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Route Assistance Logiciels + Primmo</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Route Assistance Logiciels + SyMo</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Set tickets with no priority to normal</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Réponse client → statut "Client a rappelé"</td><td><span class="dot-red"></span>Inactif</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Automations — 8 au total</div>
+        <div class="card-grid grid-2" style="margin:10px 0 14px;">
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;">4</div><div class="cl">Actives</div></div>
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;color:#EF4444;">4</div><div class="cl">Inactives</div></div>
+        </div>
+        <table class="zt">
+          <tr><th>Automation</th><th>Statut</th></tr>
+          <tr><td>Auto Solve after 240 jours pending</td><td><span class="dot-orange"></span>Actif ⚠️</td></tr>
+          <tr><td>Clore le ticket 4 jours après Résolu</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Fermer après 7 jours en attente client</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Demander note CSAT (système)</td><td><span class="dot-green"></span>Actif</td></tr>
+          <tr><td>Notification pending 24h</td><td><span class="dot-red"></span>Inactif ⚠️</td></tr>
+          <tr><td>Notification pending 5 jours</td><td><span class="dot-red"></span>Inactif ⚠️</td></tr>
+          <tr><td>[GenAI] Rappel automatique IA</td><td><span class="dot-red"></span>Inactif ⚠️</td></tr>
+          <tr><td>[GenAI] Résolution automatique IA</td><td><span class="dot-red"></span>Inactif ⚠️</td></tr>
+        </table>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Statuts personnalisés (14)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;">
+          <span class="tag-pill">À traiter</span>
+          <span class="tag-pill">En cours de traitement</span>
+          <span class="tag-pill">Réactivé</span>
+          <span class="tag-pill">Client a rappelé</span>
+          <span class="tag-pill">À traiter - assigné</span>
+          <span class="tag-pill">En attente retour client</span>
+          <span class="tag-pill">En attente d'approbation</span>
+          <span class="tag-pill">Approuvé - en attente facturation</span>
+          <span class="tag-pill">Terminé - envoyé en facturation</span>
+          <span class="tag-pill">En suspens</span>
+          <span class="tag-pill">Résolu/Fermé</span>
+          <span class="tag-pill">Facturé - Terminé</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: SLA & HORAIRES -->
+<div class="slide" id="slide-5">
+  <div class="slide-header">
+    <div class="slide-num">06 / 14</div>
+    <div class="slide-title">SLA &amp; <span>Horaires</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1;align-content:start;">
+    <div>
+      <div class="card" style="border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.05);">
+        <div class="card-title" style="color:#FCA5A5;">Situation actuelle — Critique</div>
+        <div style="text-align:center;padding:24px 0;">
+          <div style="font-size:64px;">⚠️</div>
+          <div style="font-size:28px;font-weight:800;color:#EF4444;margin:8px 0;">0 SLA Policy</div>
+          <div style="font-size:13px;color:var(--text-dim);">Aucun horaire de travail défini<br>Aucune politique SLA active</div>
+        </div>
+        <div style="font-size:13px;color:var(--text-dim);line-height:1.7;margin-top:8px;">
+          En l'état, Zendesk mesure tous les temps en continu (24h/7j), ce qui rend les métriques de temps de réponse totalement non représentatives de la performance réelle des équipes.
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Impact de l'absence de SLA</div>
+        <div class="check-col" style="margin-top:8px;">
+          <div class="check-item"><span class="check-icon">❌</span><span>Impossibilité de mesurer First Reply Time en heures ouvrées</span></div>
+          <div class="check-item"><span class="check-icon">❌</span><span>Pas d'alerte automatique lors du dépassement d'un délai contractuel</span></div>
+          <div class="check-item"><span class="check-icon">❌</span><span>Rapports de performance inutilisables pour la direction</span></div>
+          <div class="check-item"><span class="check-icon">❌</span><span>Pas de distinction entre heures ouvrées et weekend dans les calculs</span></div>
+          <div class="check-item"><span class="check-icon">❌</span><span>Aucune escalade automatique en cas de dépassement</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Configuration recommandée — Schedule</div>
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:12px;">À créer dans Admin Center > Objets et règles > Règles métier > Horaires</div>
+        <table class="zt">
+          <tr><th>Plage</th><th>Horaire suggéré</th></tr>
+          <tr><td>Lundi – Vendredi</td><td>8h00 – 17h00 EST</td></tr>
+          <tr><td>Samedi – Dimanche</td><td>Fermé</td></tr>
+          <tr><td>Fuseau horaire</td><td>Eastern Time (Canada)</td></tr>
+        </table>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">SLA recommandés par priorité</div>
+        <table class="zt">
+          <tr><th>Priorité</th><th>1ère réponse</th><th>Résolution</th></tr>
+          <tr><td><span class="badge badge-red">Urgent</span></td><td>1h</td><td>4h</td></tr>
+          <tr><td><span class="badge badge-orange">High</span></td><td>4h</td><td>24h</td></tr>
+          <tr><td><span class="badge badge-blue">Normal</span></td><td>8h</td><td>48h</td></tr>
+          <tr><td style="color:var(--text-dim);">Low</td><td>24h</td><td>96h</td></tr>
+        </table>
+        <div style="font-size:11px;color:var(--text-dim);margin-top:10px;">* Horaires en heures ouvrées. À adapter selon les contrats de support existants.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: VUES & GROUPES -->
+<div class="slide" id="slide-6">
+  <div class="slide-header">
+    <div class="slide-num">07 / 14</div>
+    <div class="slide-title">Vues &amp; <span>Organisation</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1;align-content:start;">
+    <div>
+      <div class="card">
+        <div class="card-title">Vues — 62 au total</div>
+        <div class="card-grid grid-2" style="margin:10px 0 14px;">
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;">31</div><div class="cl">Actives</div></div>
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;color:#EF4444;">31</div><div class="cl">Inactives</div></div>
+        </div>
+        <div class="section-label">Vues actives clés</div>
+        <table class="zt">
+          <tr><th>Vue</th></tr>
+          <tr><td>Expérience Client :: Reception</td></tr>
+          <tr><td>Hopem Manager</td></tr>
+          <tr><td>À traiter Primmo logiciel</td></tr>
+          <tr><td>À traiter Primmo technique</td></tr>
+        </table>
+        <div class="section-label">Vues inactives à supprimer (exemples)</div>
+        <table class="zt">
+          <tr><th>Vue système inutilisée</th></tr>
+          <tr><td style="color:var(--text-dim);">All unsolved tickets</td></tr>
+          <tr><td style="color:var(--text-dim);">Recently updated tickets</td></tr>
+          <tr><td style="color:var(--text-dim);">Current tasks / Overdue tasks</td></tr>
+          <tr><td style="color:var(--text-dim);">Pending tickets</td></tr>
+          <tr><td style="color:var(--text-dim);">Your tickets with approval requested</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">9 Groupes de support</div>
+        <table class="zt" style="margin-top:8px;">
+          <tr><th>Groupe</th><th>Usage probable</th></tr>
+          <tr><td>Administration</td><td>Gestion interne</td></tr>
+          <tr><td>Assistance</td><td>Support général</td></tr>
+          <tr><td>Info Client</td><td>Information / onboarding</td></tr>
+          <tr><td>Service Client</td><td>SAV / expérience client</td></tr>
+          <tr><td>SP</td><td>À définir (acronyme)</td></tr>
+          <tr><td>Support Applicatif</td><td>Support logiciel</td></tr>
+          <tr><td>Support R&D</td><td>Bugs / développement</td></tr>
+          <tr><td>Support Technique</td><td>Infrastructure / technique</td></tr>
+          <tr><td>Ventes</td><td>Commercial</td></tr>
+        </table>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Recommandations organisation</div>
+        <div class="check-col" style="margin-top:8px;">
+          <div class="check-item"><span class="check-icon">💡</span><span>Supprimer ou archiver les 31 vues inactives pour alléger l'interface agents</span></div>
+          <div class="check-item"><span class="check-icon">💡</span><span>Clarifier le rôle du groupe "SP" (nom non descriptif)</span></div>
+          <div class="check-item"><span class="check-icon">💡</span><span>Créer des vues par marque (Copernic, Space) pour isoler le trafic multi-brand</span></div>
+          <div class="check-item"><span class="check-icon">💡</span><span>Configurer des Workspaces contextuels pour adapter l'interface selon le produit</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: FORMULAIRES & AGENTS -->
+<div class="slide" id="slide-7">
+  <div class="slide-header">
+    <div class="slide-num">08 / 14</div>
+    <div class="slide-title">Formulaires, Champs &amp; <span>Agents</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1;align-content:start;">
+    <div>
+      <div class="card">
+        <div class="card-title">Formulaires de ticket — 3</div>
+        <table class="zt" style="margin-top:8px;">
+          <tr><th>Formulaire</th><th>Statut</th><th>Défaut</th></tr>
+          <tr><td>Hopem Client Support</td><td><span class="dot-green"></span>Actif</td><td>✅ Oui</td></tr>
+          <tr><td>Admin / Facturation</td><td><span class="dot-green"></span>Actif</td><td>Non</td></tr>
+          <tr><td>Formulaire de ticket SPACE</td><td><span class="dot-red"></span>Inactif</td><td>Non</td></tr>
+        </table>
+        <div style="margin-top:12px;padding:10px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:8px;font-size:12px;color:#FCD34D;">
+          ⚠️ Le formulaire Space est inactif alors que la marque Praeneste-Space est active. Les clients Space utilisent le formulaire Hopem par défaut, sans champs adaptés à leur produit.
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Macros — 20 (toutes actives)</div>
+        <table class="zt" style="margin-top:8px;">
+          <tr><th>Macro</th></tr>
+          <tr><td>Boite vocale</td></tr>
+          <tr><td>Boite vocale (anglais)</td></tr>
+          <tr><td>Courriel formulaire transfert d'immeuble</td></tr>
+          <tr><td>Courriel formulaire changement d'année financière</td></tr>
+          <tr><td>Lien TeamViewer</td></tr>
+          <tr><td>Demande de crédit</td></tr>
+          <tr><td>Autorisation frais et migration poste/serveur</td></tr>
+          <tr><td>+ 13 autres macros actives</td></tr>
+        </table>
+        <div style="margin-top:10px;font-size:12px;color:var(--green);">✅ Bibliothèque propre, 100% des macros actives</div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Champs de ticket — 45 champs</div>
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:10px;">Champs système + champs IA intelligents (tagger)</div>
+        <table class="zt">
+          <tr><th>Type</th><th>Champ</th></tr>
+          <tr><td><span class="tag-pill">tagger</span></td><td>Intent (intention IA)</td></tr>
+          <tr><td><span class="tag-pill">tagger</span></td><td>Language (langue détectée)</td></tr>
+          <tr><td><span class="tag-pill">tagger</span></td><td>Sentiment (positif/neutre/négatif)</td></tr>
+          <tr><td><span class="tag-pill">tagger</span></td><td>Language confidence</td></tr>
+          <tr><td><span class="tag-pill">tagger</span></td><td>Sentiment confidence</td></tr>
+          <tr><td><span class="tag-pill">tagger</span></td><td>Intent confidence</td></tr>
+          <tr><td><span class="tag-pill">tagger</span></td><td>Approval status</td></tr>
+        </table>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Agents — 41 actifs</div>
+        <div class="card-grid grid-2" style="margin:8px 0;">
+          <div style="text-align:center;"><div class="cn" style="font-size:22px;">41</div><div class="cl">Agents actifs</div></div>
+          <div style="text-align:center;"><div class="cn" style="font-size:22px;">9</div><div class="cl">Groupes</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--text-dim);">Équipe de taille significative. À vérifier : attribution des agents aux bons groupes, rôles (agent vs admin), et présence d'agents inactifs à désactiver.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: HELP CENTER & IA -->
+<div class="slide" id="slide-8">
+  <div class="slide-header">
+    <div class="slide-num">09 / 14</div>
+    <div class="slide-title">Help Center &amp; <span>IA</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1;align-content:start;">
+    <div>
+      <div class="card">
+        <div class="card-title">Help Center — 62 articles</div>
+        <div class="card-grid grid-2" style="margin:10px 0 14px;">
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;">62</div><div class="cl">Articles</div></div>
+          <div style="text-align:center;"><div class="cn" style="font-size:24px;">2</div><div class="cl">Catégories</div></div>
+        </div>
+        <table class="zt">
+          <tr><th>Catégorie</th></tr>
+          <tr><td>📂 Logiciel HOPEM PRIMMO</td></tr>
+          <tr><td>📂 Logiciel SPACE</td></tr>
+        </table>
+        <div class="check-col" style="margin-top:14px;">
+          <div class="check-item"><span class="check-icon">✅</span><span>Help Center en place pour les 2 produits principaux</span></div>
+          <div class="check-item"><span class="check-icon">💡</span><span>Ajouter une catégorie pour Copernic et Abak si ces produits ont des utilisateurs</span></div>
+          <div class="check-item"><span class="check-icon">💡</span><span>Activer la recherche intelligente IA (Generative Search) pour accélérer l'auto-service</span></div>
+          <div class="check-item"><span class="check-icon">💡</span><span>Vérifier que les articles sont liés aux tickets fréquents (suggestions automatiques)</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Intelligence Artificielle — Zendesk AI actif</div>
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:12px;">Le tri intelligent est activé et produit des données riches. Tags IA détectés :</div>
+        <table class="zt">
+          <tr><th>Tag IA</th><th>Occurrences</th></tr>
+          <tr><td>language__fr</td><td>2 045</td></tr>
+          <tr><td>language_confidence__high</td><td>1 997</td></tr>
+          <tr><td>sentiment__neutral</td><td>1 670</td></tr>
+          <tr><td>sentiment_confidence__high</td><td>1 862</td></tr>
+          <tr><td>intent_confidence__low</td><td>1 271</td></tr>
+        </table>
+        <div style="margin-top:12px;">
+          <div class="check-item"><span class="check-icon">✅</span><span>Détection de langue active (majoritairement français canadien)</span></div>
+          <div class="check-item" style="margin-top:6px;"><span class="check-icon">✅</span><span>Analyse de sentiment en place</span></div>
+          <div class="check-item" style="margin-top:6px;"><span class="check-icon">⚠️</span><span>Intent confidence souvent "low" — les intents IA gagneraient à être entraînés avec plus de données</span></div>
+          <div class="check-item" style="margin-top:6px;"><span class="check-icon">🔴</span><span>Automations GenAI inactives — l'IA collecte les données mais n'agit pas encore automatiquement</span></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Copilot / Agent IA</div>
+        <div style="font-size:13px;color:var(--text-dim);line-height:1.7;">Un token "Copilot Studio – Agent billets" existe et est actif. Cela indique une intégration avec Microsoft Copilot Studio pour la gestion de tickets. Vérifier que l'intégration est opérationnelle et documentée pour les agents.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: PLAN D'ACTION -->
+<div class="slide" id="slide-9">
+  <div class="slide-header">
+    <div class="slide-num">10 / 14</div>
+    <div class="slide-title">Plan d'<span>action</span></div>
+  </div>
+  <div class="card-grid grid-4" style="flex:1;align-content:start;">
+    <div>
+      <div class="card-title" style="color:#EF4444;margin-bottom:12px;">🔴 Semaine 1</div>
+      <div class="plan-col">
+        <div class="plan-item"><strong>S1.1 — Critique</strong>Créer le schedule "Heures ouvrées EST" (Lun-Ven 8h-17h) dans Admin Center</div>
+        <div class="plan-item"><strong>S1.2 — Critique</strong>Créer au minimum 2 politiques SLA (Urgent : 1h/4h, Normal : 8h/48h) liées au schedule</div>
+        <div class="plan-item"><strong>S1.3 — Critique</strong>Activer les automations GenAI (Rappel + Résolution) et configurer leurs conditions</div>
+      </div>
+    </div>
+    <div>
+      <div class="card-title" style="color:#F59E0B;margin-bottom:12px;">🟡 Semaine 2</div>
+      <div class="plan-col">
+        <div class="plan-item"><strong>S2.1 — Important</strong>Activer le formulaire Space + ajouter les champs spécifiques au produit Praeneste</div>
+        <div class="plan-item"><strong>S2.2 — Important</strong>Activer les notifications "pending 24h" et "pending 5 jours"</div>
+        <div class="plan-item"><strong>S2.3 — Important</strong>Réduire l'automation "Auto Solve" de 240 à 45 jours</div>
+        <div class="plan-item"><strong>S2.4 — Important</strong>Revoir les critères de priorité (Urgent/High à 37% trop élevé)</div>
+      </div>
+    </div>
+    <div>
+      <div class="card-title" style="color:#3B82F6;margin-bottom:12px;">🔵 Mois 1</div>
+      <div class="plan-col">
+        <div class="plan-item"><strong>M1.1</strong>Nettoyer les 31 vues inactives — archiver les vues système non utilisées</div>
+        <div class="plan-item"><strong>M1.2</strong>Créer des vues dédiées par marque (Copernic, Space)</div>
+        <div class="plan-item"><strong>M1.3</strong>Configurer les Workspaces contextuels par produit (Primmo, Space, Copernic)</div>
+        <div class="plan-item"><strong>M1.4</strong>Clarifier le groupe "SP" — renommer ou documenter son rôle</div>
+      </div>
+    </div>
+    <div>
+      <div class="card-title" style="color:var(--purple-light);margin-bottom:12px;">🟣 Trimestre 1</div>
+      <div class="plan-col">
+        <div class="plan-item"><strong>T1.1</strong>Entraîner les modèles d'intention IA (intent confidence trop souvent "low")</div>
+        <div class="plan-item"><strong>T1.2</strong>Configurer le routage basé sur les compétences (Skills-based routing)</div>
+        <div class="plan-item"><strong>T1.3</strong>Ajouter articles HC pour Copernic et Abak</div>
+        <div class="plan-item"><strong>T1.4</strong>Mettre en place un tableau de bord de performance SLA pour la direction</div>
+        <div class="plan-item"><strong>T1.5</strong>Documenter et former les agents aux nouveaux statuts et workflows</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: OPPORTUNITES -->
+<div class="slide" id="slide-10">
+  <div class="slide-header">
+    <div class="slide-num">11 / 14</div>
+    <div class="slide-title">Opportunités &amp; <span>Flux recommandés</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1;align-content:start;">
+    <div>
+      <div class="card">
+        <div class="card-title">Flux recommandé — Ticket entrant</div>
+        <div style="font-size:13px;line-height:2;color:var(--text-dim);margin-top:8px;">
+          <div>1. 📥 Ticket créé (email / web / voix / chat)</div>
+          <div>2. 🤖 Tri intelligent IA → détection langue + intention + sentiment</div>
+          <div>3. 🏷️ Tag produit (Primmo / Space / Copernic / Abak…)</div>
+          <div>4. 🔀 Trigger de routage → groupe correspondant</div>
+          <div>5. 📊 SLA déclenché selon priorité + schedule heures ouvrées</div>
+          <div>6. 👤 Assignation agent → statut "À traiter - assigné"</div>
+          <div>7. ✅ Résolution → CSAT automatique → clôture 4 jours après</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-title">Opportunité — CSAT</div>
+        <div style="text-align:center;padding:16px 0;">
+          <div style="font-size:48px;font-weight:800;color:var(--green);">91%</div>
+          <div style="font-size:13px;color:var(--text-dim);">1 782 avis positifs · 178 négatifs</div>
+        </div>
+        <div style="font-size:13px;color:var(--text-dim);line-height:1.7;">
+          Score excellent. Exploiter ce capital en publiant les avis positifs et en créant un programme de suivi des 9% insatisfaits pour identifier les patterns récurrents.
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Opportunités identifiées</div>
+        <div class="check-col" style="margin-top:8px;">
+          <div class="check-item"><span class="check-icon">🚀</span><span><strong>GenAI pour tickets répétitifs</strong> — Activer les automations IA pour résoudre automatiquement les demandes simples (réinitialisation password, demandes de doc, etc.) et réduire le volume humain de 15-25%</span></div>
+          <div class="check-item" style="margin-top:8px;"><span class="check-icon">🚀</span><span><strong>Self-service HC</strong> — Avec 62 articles déjà en place, activer la recherche IA dans le Help Center pour déflexion des tickets courants (suggestion d'articles avant soumission)</span></div>
+          <div class="check-item" style="margin-top:8px;"><span class="check-icon">🚀</span><span><strong>Tableau de bord SLA</strong> — Une fois les SLA configurés, un dashboard temps réel permettrait à Hopem de piloter les engagements client et identifier les goulots d'étranglement par groupe</span></div>
+          <div class="check-item" style="margin-top:8px;"><span class="check-icon">🚀</span><span><strong>Skills-based routing</strong> — Avec 9 groupes et 41 agents, configurer le routage par compétences permettrait une distribution plus fine (niveau 1/2/3, expert par module logiciel)</span></div>
+          <div class="check-item" style="margin-top:8px;"><span class="check-icon">🚀</span><span><strong>Multi-brand complet</strong> — Les 3 marques sont actives mais le formulaire Space est inactif. Activer un HC dédié par marque avec branding propre</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: RESUME CHECKLIST -->
+<div class="slide" id="slide-11">
+  <div class="slide-header">
+    <div class="slide-num">12 / 14</div>
+    <div class="slide-title">Résumé &amp; <span>Checklist</span></div>
+  </div>
+  <div class="card-grid grid-2" style="flex:1;align-content:start;">
+    <div>
+      <div class="card">
+        <div class="card-title">Actions par sévérité</div>
+        <div class="check-col" style="margin-top:8px;">
+          <div style="font-size:11px;color:#FCA5A5;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Critique</div>
+          <div class="check-item"><span class="check-icon">🔴</span><span>Créer un horaire de travail (schedule) EST</span></div>
+          <div class="check-item"><span class="check-icon">🔴</span><span>Créer les politiques SLA par priorité</span></div>
+          <div class="check-item"><span class="check-icon">🔴</span><span>Activer les automations GenAI (Rappel + Résolution)</span></div>
+          <div style="font-size:11px;color:#FCD34D;text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px;">Important</div>
+          <div class="check-item"><span class="check-icon">🟡</span><span>Activer le formulaire Space</span></div>
+          <div class="check-item"><span class="check-icon">🟡</span><span>Activer notifications pending 24h et 5 jours</span></div>
+          <div class="check-item"><span class="check-icon">🟡</span><span>Réduire Auto Solve à 45 jours</span></div>
+          <div class="check-item"><span class="check-icon">🟡</span><span>Réviser les critères de priorité (37% urgent/high)</span></div>
+          <div style="font-size:11px;color:#93C5FD;text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px;">Optimisation</div>
+          <div class="check-item"><span class="check-icon">🔵</span><span>Nettoyer 31 vues inactives</span></div>
+          <div class="check-item"><span class="check-icon">🔵</span><span>Créer Workspaces par produit</span></div>
+          <div class="check-item"><span class="check-icon">🔵</span><span>Configurer skills-based routing</span></div>
+          <div class="check-item"><span class="check-icon">🔵</span><span>Entraîner les modèles d'intention IA</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Points forts à conserver</div>
+        <div class="check-col" style="margin-top:8px;">
+          <div class="check-item"><span class="check-icon">✅</span><span>CSAT 91% — score remarquable</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Zendesk AI actif avec tri intelligent opérationnel</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Architecture multi-brand cohérente (3 marques)</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Routage produit structuré (triggers par logiciel)</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>14 statuts personnalisés reflétant le workflow facturation</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>20 macros toutes actives, bibliothèque propre</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Help Center en place — 62 articles sur 2 produits</span></div>
+          <div class="check-item"><span class="check-icon">✅</span><span>Intégration Copilot Studio opérationnelle</span></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;text-align:center;padding:20px;">
+        <div class="card-title">Contact audit</div>
+        <div style="margin-top:10px;font-size:13px;color:var(--text-dim);">
+          <div>Stéphanie · OmyCare</div>
+          <div style="margin-top:4px;color:var(--purple-light);">guillaume.garcia@omycare.fr</div>
+          <div style="margin-top:4px;">Octobre 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: DASHBOARD KPI -->
+<div class="slide" id="slide-12">
+  <div class="slide-header">
+    <div class="slide-num">13 / 14</div>
+    <div class="slide-title">Dashboard <span>KPI</span></div>
+  </div>
+  <div class="card-grid grid-4" style="margin-bottom:16px;">
+    <div class="kpi-card"><div class="kpi-num">12 159</div><div class="kpi-label">Tickets total</div></div>
+    <div class="kpi-card"><div class="kpi-num" style="color:#10B981;">91%</div><div class="kpi-label">CSAT</div></div>
+    <div class="kpi-card"><div class="kpi-num">184</div><div class="kpi-label">Tickets actifs</div></div>
+    <div class="kpi-card"><div class="kpi-num" style="color:#EF4444;">37%</div><div class="kpi-label">Urgent + High</div></div>
+  </div>
+  <div class="card-grid grid-3" style="flex:1;align-content:start;">
+    <div class="card">
+      <div class="card-title">Distribution par statut</div>
+      <div style="margin-top:10px;">
+        <div class="bar-row"><div class="bar-label">Fermés</div><div class="bar-track"><div class="bar-fill" style="width:97.6%;background:var(--text-dim);"></div></div><div class="bar-val">11 867</div></div>
+        <div class="bar-row"><div class="bar-label">Résolus</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--green);"></div></div><div class="bar-val">108</div></div>
+        <div class="bar-row"><div class="bar-label">En attente</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:var(--orange);"></div></div><div class="bar-val">74</div></div>
+        <div class="bar-row"><div class="bar-label">Ouverts</div><div class="bar-track"><div class="bar-fill" style="width:2.5%;background:var(--blue);"></div></div><div class="bar-val">76</div></div>
+        <div class="bar-row"><div class="bar-label">Nouveaux</div><div class="bar-track"><div class="bar-fill" style="width:1.5%;background:var(--purple);"></div></div><div class="bar-val">34</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Distribution par priorité</div>
+      <div style="margin-top:10px;">
+        <div class="bar-row"><div class="bar-label">Normal</div><div class="bar-track"><div class="bar-fill" style="width:64%;background:var(--blue);"></div></div><div class="bar-val">7 812</div></div>
+        <div class="bar-row"><div class="bar-label">Urgent</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--red);"></div></div><div class="bar-val">2 456</div></div>
+        <div class="bar-row"><div class="bar-label">High</div><div class="bar-track"><div class="bar-fill" style="width:16%;background:var(--orange);"></div></div><div class="bar-val">2 000</div></div>
+        <div class="bar-row"><div class="bar-label">Low</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:var(--text-dim);"></div></div><div class="bar-val">75</div></div>
+      </div>
+      <div style="margin-top:12px;padding:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:6px;font-size:11px;color:#FCA5A5;">
+        ⚠️ 37% en Urgent/High — révision des critères de priorité recommandée
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Top tags produits</div>
+      <div style="margin-top:10px;">
+        <div class="bar-row"><div class="bar-label" style="font-size:11px;">primmo-gl</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--purple);"></div></div><div class="bar-val">1 914</div></div>
+        <div class="bar-row"><div class="bar-label" style="font-size:11px;">primmo-cf</div><div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--purple);"></div></div><div class="bar-val">1 829</div></div>
+        <div class="bar-row"><div class="bar-label" style="font-size:11px;">primmo-imm</div><div class="bar-track"><div class="bar-fill" style="width:91%;background:var(--purple);"></div></div><div class="bar-val">1 743</div></div>
+        <div class="bar-row"><div class="bar-label" style="font-size:11px;">primmo-cc</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--purple-dark);"></div></div><div class="bar-val">969</div></div>
+        <div class="bar-row"><div class="bar-label" style="font-size:11px;">primmo-app</div><div class="bar-track"><div class="bar-fill" style="width:44%;background:var(--purple-dark);"></div></div><div class="bar-val">844</div></div>
+        <div class="bar-row"><div class="bar-label" style="font-size:11px;">primmo-imc</div><div class="bar-track"><div class="bar-fill" style="width:42%;background:var(--purple-dark);"></div></div><div class="bar-val">809</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: MERCI -->
+<div class="slide" id="slide-13">
+  <div class="cover-centered" style="min-height:calc(100vh - 96px);">
+    <div style="font-size:48px;margin-bottom:16px;">🙏</div>
+    <div class="cover-h1" style="white-space:nowrap;font-size:clamp(26px,3.8vw,46px);">Merci <span>pour votre confiance</span></div>
+    <div class="merci-logos">
+      <a href="https://omycare.fr/" target="_blank" rel="noopener"><img src="omycarelogo.png" alt="OmyCare" style="height:36px;"></a>
+      <div class="merci-sep"></div>
+      <span style="font-size:18px;font-weight:700;color:var(--purple-light);">Hopem</span>
+    </div>
+    <p style="max-width:700px;font-size:15px;line-height:2;color:var(--text-dim);text-align:center;">
+      Ce rapport est la base de travail pour optimiser votre compte Zendesk.<br>
+      Nous restons disponibles pour toute question ou pour la mise en oeuvre.
+    </p>
+    <div class="merci-info">
+      <div class="merci-info-col"><div class="label">Auditeur</div><div class="val">Stephanie · OmyCare</div></div>
+      <div class="merci-info-col"><div class="label">Contact</div><div class="val">guillaume.garcia@omycare.fr</div></div>
+      <div class="merci-info-col"><div class="label">Date</div><div class="val">Octobre 2026</div></div>
+    </div>
+    <div class="next-box">
+      <strong style="color:var(--purple-light);">Prochaine étape</strong><br>
+      Planifier une session de travail avec votre équipe pour prioriser les actions S1 (SLA + Horaires + GenAI) et définir les engagements de temps de réponse selon vos contrats clients.
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+const dotsContainer = document.getElementById('nav-dots');
+const logoFixed = document.getElementById('logo-fixed');
+
+// Create dots
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsContainer.appendChild(d);
+});
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  dotsContainer.children[current].classList.remove('active');
+  current = (n + total) % total;
+  slides[current].classList.add('active');
+  dotsContainer.children[current].classList.add('active');
+  slides[current].scrollTop = 0;
+  // Hide logo on last slide (Merci)
+  logoFixed.style.display = current === total - 1 ? 'none' : 'block';
+}
+
+function navigate(dir) { goTo(current + dir); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(-1);
+});
+
+// Touch swipe
+let touchX = 0;
+document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const dx = touchX - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 50) navigate(dx > 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>
