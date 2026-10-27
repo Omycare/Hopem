@@ -841,94 +841,117 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 10 : PLAN D'ACTION ══ -->
+<!-- ══ SLIDE 10 : SYNTHESE & PLAN D'ACTION ══ -->
 <div class="slide" id="slide-10">
   <div class="slide-header">
-    <h2>🗓 Plan d'action priorisé</h2>
-    <span class="sh-badge">S1 · S2 · M1 · T1</span>
+    <h2>📋 Synthèse &amp; Plan d'action</h2>
+    <span class="sh-badge">3 DOMAINES · 2 CRITIQUES · 5 IMPORTANTS</span>
   </div>
-  <div class="slide-body">
-    <div class="grid grid-4" style="gap:14px;">
+  <div class="slide-body" style="padding:10px 16px 72px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+
+      <!-- COL 1 : Structure & Configuration -->
       <div>
-        <div class="card" style="border-top:3px solid #EF4444;">
-          <div class="section-label" style="color:#EF4444;">🔴 Semaine 1 : Critique</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-            <div class="alert alert-red" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S1.1</strong> Créer le schedule "Heures ouvrées EST" dans Admin Center (Lun-Ven 8h-17h)</div>
-            </div>
-            <div class="alert alert-red" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S1.2</strong> Créer 2 politiques SLA minimum (Urgent : 1h/4h : Normal : 8h/48h) liées au schedule</div>
-            </div>
-            <div class="alert alert-red" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S1.3</strong> Activer les automations GenAI : Rappel et Résolution : et vérifier leurs conditions de déclenchement</div>
-            </div>
-          </div>
+        <div style="background:linear-gradient(135deg,#7C3AED,#A855F7);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Structure &amp; Configuration</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">0 politique SLA : aucun engagement de délai mesurable pour un support B2B</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucun schedule (horaire de travail) : prérequis SLA absent</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire Space inactif alors que la marque Praeneste-Space est active</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">31 vues inactives sur 62 : vues système jamais utilisées ni personnalisées</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">SPF / DKIM / DMARC : délivrabilité email à vérifier</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Groupe "SP" : nom non descriptif, rôle non documenté</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Architecture multi-brand cohérente : 3 marques, 9 groupes</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#166534;">20 macros actives, bibliothèque propre et sans doublons</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- COL 2 : Automatisation & IA -->
+      <div>
+        <div style="background:linear-gradient(135deg,#DB2777,#F97316);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Automatisation &amp; IA</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Automations GenAI configurées mais inactives : Rappel et Résolution automatique</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">37% des tickets classés Urgent ou High : taux anormal, possible surclassement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Auto-Solve à 240 jours : délai excessif, standard recommandé 30 à 60 jours</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Relances "pending" désactivées : notifications 24h et 5 jours inactives</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Intent confidence "low" sur 1 271 tickets : modèles d'intention à entraîner</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Tri IA actif : langue, sentiment et intention détectés automatiquement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">CSAT 91% : score remarquable pour un support logiciel B2B</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#166534;">56 triggers, 46 actifs : routage produit structuré par logiciel</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- COL 3 : Multi-brand & Qualité -->
+      <div>
+        <div style="background:linear-gradient(135deg,#D97706,#F59E0B);border-radius:10px;padding:8px 12px;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px;">Multi-brand &amp; Qualité</span>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px;">
+          <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : Copernic et Abak sans documentation libre-service</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Labels HC à vérifier : sans labels, Copilot ne suggère aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Articles avec captures d'écran sans texte : non exploitables par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Web Widget / Messaging : présence et configuration à confirmer</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Apps installées : liste à auditer, apps non utilisées à désinstaller</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">14 statuts personnalisés reflétant le workflow facturation complet</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Copilot Studio (Microsoft) opérationnel et connecté</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#166534;">Help Center : 62 articles sur Primmo et Space, bon démarrage</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">🗓 Plan d'action priorisé</div>
+    <div class="grid grid-2" style="gap:14px;">
+      <div>
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label" style="color:#EF4444;">🔴 Priorité critique (C1)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer le schedule "Heures ouvrées EST" Lundi-Vendredi 8h-17h (prérequis SLA)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer les politiques SLA : Urgent 1h réponse / 4h résolution, Normal 8h / 48h, liées au schedule</span></div>
+        </div>
+
+        <div class="card">
+          <div class="section-label" style="color:#F97316;">🟠 Points importants (C2-C4)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Activer les automations GenAI : Rappel et Résolution automatique par IA</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Activer le formulaire Space et ajouter les champs spécifiques Praeneste</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Recalibrer les critères de priorité pour ramener Urgent/High sous 15%</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Activer les notifications pending 24h et 5 jours</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Réduire Auto-Solve de 240 à 45 jours</span></div>
         </div>
       </div>
 
       <div>
-        <div class="card" style="border-top:3px solid #F97316;">
-          <div class="section-label" style="color:#F97316;">🟠 Semaine 2 : Important</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-            <div class="alert alert-orange" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S2.1</strong> Activer le formulaire Space et ajouter les champs spécifiques au produit Praeneste</div>
-            </div>
-            <div class="alert alert-orange" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S2.2</strong> Activer les notifications pending 24h et 5 jours</div>
-            </div>
-            <div class="alert alert-orange" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S2.3</strong> Réduire l'automation "Auto Solve" de 240 à 45 jours</div>
-            </div>
-            <div class="alert alert-orange" style="margin-bottom:0;">
-              <div class="alert-body"><strong>S2.4</strong> Auditer et recalibrer les critères de priorité pour ramener Urgent/High en dessous de 15%</div>
-            </div>
-          </div>
+        <div class="card" style="margin-bottom:10px;">
+          <div class="section-label" style="color:#EAB308;">🟡 Améliorations (C5-C6)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Supprimer / archiver les 31 vues inactives, créer des vues par marque</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Vérifier la configuration SPF, DKIM et DMARC pour l'adresse email support</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Ajouter des labels aux articles HC (requis pour le fonctionnement de Copilot AI)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Auditer les apps installées et désinstaller les apps non utilisées</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Clarifier ou renommer le groupe "SP", vérifier les membres de chaque groupe</span></div>
         </div>
-      </div>
 
-      <div>
-        <div class="card" style="border-top:3px solid #3B82F6;">
-          <div class="section-label" style="color:#3B82F6;">🔵 Mois 1 : Optimisation</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-            <div class="alert alert-blue" style="margin-bottom:0;">
-              <div class="alert-body"><strong>M1.1</strong> Nettoyer les 31 vues inactives, archiver les vues système non utilisées</div>
-            </div>
-            <div class="alert alert-blue" style="margin-bottom:0;">
-              <div class="alert-body"><strong>M1.2</strong> Créer des vues dédiées par marque (Copernic, Space)</div>
-            </div>
-            <div class="alert alert-blue" style="margin-bottom:0;">
-              <div class="alert-body"><strong>M1.3</strong> Configurer les Workspaces contextuels par produit (Primmo, Space, Copernic)</div>
-            </div>
-            <div class="alert alert-blue" style="margin-bottom:0;">
-              <div class="alert-body"><strong>M1.4</strong> Clarifier ou renommer le groupe "SP"</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="card" style="border-top:3px solid #8B5CF6;">
-          <div class="section-label" style="color:#8B5CF6;">🟣 Trimestre 1 : Croissance</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-            <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-body"><strong>T1.1</strong> Entraîner les modèles d'intention IA (intent confidence trop souvent "low")</div>
-            </div>
-            <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-body"><strong>T1.2</strong> Configurer le routage basé sur les compétences (Skills-based routing : 0 attributs actuellement)</div>
-            </div>
-            <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-body"><strong>T1.3</strong> Ajouter des articles HC pour Copernic et Abak</div>
-            </div>
-            <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-body"><strong>T1.4</strong> Mettre en place un dashboard Explore de performance SLA pour la direction</div>
-            </div>
-            <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-body"><strong>T1.5</strong> Former les agents aux nouveaux statuts personnalisés et au workflow facturation</div>
-            </div>
-          </div>
+        <div class="card">
+          <div class="section-label" style="color:#22C55E;">🟢 Optimisations (C7+)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Créer les articles HC pour Copernic et Abak</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Configurer les Workspaces contextuels par produit (Primmo, Space, Copernic)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Entraîner les modèles d'intention IA (intent confidence souvent "low")</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Configurer le routage par compétences (niveau 1/2/3 et module logiciel)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Déployer un dashboard Explore pour le suivi SLA et CSAT par produit</span></div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -996,81 +1019,8 @@
   </div>
 </div>
 
-<!-- ══ SLIDE 12 : RÉSUMÉ CHECKLIST ══ -->
+<!-- ══ SLIDE 12 : DASHBOARD KPI ══ -->
 <div class="slide" id="slide-12">
-  <div class="slide-header">
-    <h2>✅ Résumé &amp; Checklist interactive</h2>
-    <span class="sh-badge">2 CRITIQUES · 7 IMPORTANTS · 6 OPTIMISATIONS</span>
-  </div>
-  <div class="slide-body">
-    <div class="grid grid-2" style="gap:14px;">
-      <div>
-        <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#EF4444;">Actions critiques : à faire cette semaine</div>
-          <div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer le schedule "Heures ouvrées EST" Lundi-Vendredi 8h-17h</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer les politiques SLA (Urgent : 1h réponse / 4h résolution : Normal : 8h / 48h)</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Activer les automations GenAI : Rappel et Résolution automatique par IA</span></div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#F97316;">Actions importantes : semaines 1-2</div>
-          <div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Activer le formulaire Space + ajouter champs produit Praeneste</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Recalibrer les critères de priorité pour ramener Urgent/High &lt;15%</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Activer les notifications pending 24h et 5 jours</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Réduire Auto Solve de 240 à 45 jours</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Supprimer / archiver les 31 vues inactives</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Vérifier et corriger la configuration SPF, DKIM, DMARC pour l'adresse email support</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Auditer les apps installées : désinstaller les apps non utilisées</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="section-label" style="color:#3B82F6;">Optimisations : mois 1</div>
-          <div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Créer des vues dédiées par marque (Copernic, Space)</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Configurer les Workspaces contextuels par produit</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Clarifier ou renommer le groupe "SP"</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Ajouter articles HC pour Copernic et Abak</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Ajouter des labels aux articles HC (requis pour le fonctionnement du Copilot AI)</span></div>
-            <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text">Configurer le routage par compétences (Skills-based routing) par niveau et module logiciel</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="card" style="margin-bottom:10px;">
-          <div class="section-label" style="color:#22C55E;">Points forts à préserver</div>
-          <ul class="check-list">
-            <li>CSAT 91% : score remarquable, à protéger et monitorer</li>
-            <li>Zendesk AI actif : tri langue, sentiment, intention opérationnel</li>
-            <li>Architecture multi-brand cohérente (3 marques)</li>
-            <li>Routage produit structuré via triggers dédiés</li>
-            <li>14 statuts personnalisés reflétant le workflow facturation</li>
-            <li>20 macros toutes actives, bibliothèque propre</li>
-            <li>Help Center en place : 62 articles sur Primmo et Space</li>
-            <li>Intégration Copilot Studio opérationnelle</li>
-          </ul>
-        </div>
-
-        <div class="card" style="padding:20px;text-align:center;">
-          <div class="section-label">Contact audit</div>
-          <div style="margin-top:12px;">
-            <a href="https://omycare.fr/" target="_blank" rel="noopener"><img src="omycarelogo.png" alt="OmyCare" style="height:28px;margin-bottom:12px;"></a>
-            <div style="font-size:13px;color:#374151;font-weight:600;">Stephanie · OmyCare</div>
-            <div style="font-size:12px;color:#8B5CF6;margin-top:4px;">guillaume.garcia@omycare.fr</div>
-            <div style="font-size:12px;color:#9CA3AF;margin-top:4px;">Octobre 2026</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ SLIDE 13 : DASHBOARD KPI ══ -->
-<div class="slide" id="slide-13">
   <div class="slide-header">
     <h2>📈 Dashboard KPI : Données réelles API</h2>
     <span class="sh-badge">12 159 TICKETS · CSAT 91% · 37% URGENT+HIGH</span>
@@ -1258,7 +1208,7 @@
 </div>
 
 <!-- ══ SLIDE 14 : MERCI ══ -->
-<div class="slide slide-dark" id="slide-14">
+<div class="slide slide-dark" id="slide-13">
   <div class="cover-centered">
     <div style="font-size:48px;margin-bottom:16px;">🙏</div>
     <h1 style="font-size:clamp(26px,3.8vw,46px);font-weight:800;color:#fff;white-space:nowrap;margin-bottom:12px;">
@@ -1299,11 +1249,11 @@
   <button onclick="goTo(current-1)">←</button>
   <div class="dots" id="dots"></div>
   <button onclick="goTo(current+1)">→</button>
-  <span class="slide-counter" id="counter">1 / 14</span>
+  <span class="slide-counter" id="counter">1 / 13</span>
 </nav>
 
 <script>
-  const total = 14;
+  const total = 13;
   let current = 1;
   const logo = document.querySelector('.logo-fixed');
 
@@ -1325,7 +1275,7 @@
     document.getElementById('slide-' + current).classList.add('active');
     document.getElementById('counter').textContent = current + ' / ' + total;
     buildDots();
-    if (logo) logo.style.display = (current === 14) ? 'none' : '';
+    if (logo) logo.style.display = (current === 13) ? 'none' : '';
   }
 
   buildDots();
