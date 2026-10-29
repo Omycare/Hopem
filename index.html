@@ -222,7 +222,7 @@
         <ul class="check-list">
           <li>CSAT de <strong>91%</strong> : score remarquable pour un support logiciel B2B</li>
           <li>Zendesk AI actif : langue, sentiment, intention + 2 entités métier (Gamme, Module Primmo) détectées automatiquement sur chaque ticket</li>
-          <li>Architecture multi-brand cohérente : Hopem, Copernic, Praeneste-Space</li>
+          <li>Architecture multi-brand active : 3 marques configurées (Hopem, Copernic, Praeneste-Space)</li>
           <li>Routage produit structuré via triggers dédiés par logiciel (Primmo, Abak, SyMo, ProMenu, Space, Diligence)</li>
           <li>Help Center : 25 articles publiés + 22 procédures Copilot couvrant les processus métier clés (baux, facturation, signature électronique)</li>
           <li>Intégration Copilot Studio active + génération automatique de procédures IA hebdomadaire</li>
@@ -231,6 +231,7 @@
       <div class="card">
         <div class="section-label">✗ Problèmes détectés</div>
         <ul class="check-list cross-list">
+          <li><strong>Aucun domaine personnalisé</strong> : les 3 marques exposent l'URL zendesk.com par défaut, y compris depuis le site web principal</li>
           <li><strong>0 politique SLA</strong> : aucun engagement de délai mesuré, rapports de performance inutilisables</li>
           <li><strong>Aucun horaire de travail (schedule)</strong> : prérequis indispensable au SLA, absent du compte</li>
           <li><strong>37% de tickets Urgent/High</strong> : taux anormalement élevé, possible surclassement automatique</li>
@@ -618,14 +619,23 @@
         <div class="card">
           <div class="section-label">Architecture multi-brand (3 marques)</div>
           <table>
-            <thead><tr><th>Marque</th><th>Sous-domaine</th><th>Statut</th></tr></thead>
+            <thead><tr><th>Marque</th><th>Sous-domaine Zendesk</th><th>Domaine personnalisé</th><th>Statut</th></tr></thead>
             <tbody>
-              <tr><td>Hopem</td><td>hopem-55629</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Copernic</td><td>copernic-26</td><td><span class="badge badge-green">Actif</span></td></tr>
-              <tr><td>Praeneste - Logiciel Space</td><td>praeneste-space</td><td><span class="badge badge-green">Actif</span></td></tr>
+              <tr><td>Hopem</td><td style="font-size:10px;color:#6B7280;">hopem-55629.zendesk.com</td><td><span class="badge badge-red">Non mappé ⚠</span></td><td><span class="badge badge-green">Actif</span></td></tr>
+              <tr><td>Copernic</td><td style="font-size:10px;color:#6B7280;">copernic-26.zendesk.com</td><td><span class="badge badge-red">Non mappé ⚠</span></td><td><span class="badge badge-green">Actif</span></td></tr>
+              <tr><td>Praeneste - Space</td><td style="font-size:10px;color:#6B7280;">praeneste-space.zendesk.com</td><td><span class="badge badge-red">Non mappé ⚠</span></td><td><span class="badge badge-green">Actif</span></td></tr>
             </tbody>
           </table>
-          <div class="alert alert-orange" style="margin-top:10px;">
+          <div class="alert alert-red" style="margin-top:10px;margin-bottom:8px;">
+            <div class="alert-title">🔴 Help Center public sur URL Zendesk par défaut</div>
+            <div class="alert-body">
+              Aucune des 3 marques n'a de domaine personnalisé configuré. Le Help Center est public et actif à l'URL <strong>hopem-55629.zendesk.com</strong>, qui est également liée depuis le site web principal de Hopem. Les clients voient donc une URL de marque Zendesk et non une URL Hopem.<br><br>
+              Impacts : image de marque dégradée, perte de confiance client, impossibilité d'avoir un HC distinct par marque (Copernic, Space) sans domaine dédié, et risque SEO (le contenu HC n'est pas indexé sous le domaine Hopem).
+              <br><br>
+              <strong>Action :</strong> Configurer un domaine personnalisé pour chaque marque dans Admin Center &gt; Compte &gt; Marques (ex: support.hopem.com, help.copernic.com). Mettre à jour le lien sur le site web.
+            </div>
+          </div>
+          <div class="alert alert-orange" style="margin-bottom:0;">
             <div class="alert-title">⚠ Groupe "SP" non documenté</div>
             <div class="alert-body">Le groupe "SP" a un nom non descriptif. Renommer ou documenter son rôle pour éviter la confusion lors de l'onboarding de nouveaux agents.</div>
           </div>
@@ -1000,6 +1010,7 @@
         <table style="width:100%;border-collapse:collapse;font-size:10px;">
           <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
           <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;"><strong>Help Center public sur URL Zendesk par défaut</strong> (hopem-55629.zendesk.com) : aucun domaine personnalisé, lien depuis le site web principal</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucun AI Agent Chat configuré : le chat propose uniquement des réponses basiques sans résolution autonome</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 37 brouillons non publiés, plus de brouillons que d'articles publiés (25)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : Copernic et Abak sans documentation libre-service</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
@@ -1057,6 +1068,7 @@
 
         <div class="card">
           <div class="section-label" style="color:#22C55E;">🟢 Optimisations (C7+)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Configurer un domaine personnalisé pour chaque marque (ex: support.hopem.com, help.copernic.com) et mettre à jour le lien du site web principal</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Personnaliser le branding Help Center (supprimer le watermark Zendesk, corriger la mise en page dupliquée)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Créer les articles HC pour Copernic et Abak</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Configurer les Workspaces contextuels par produit (Primmo, Space, Copernic)</span></div>
