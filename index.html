@@ -727,25 +727,20 @@
               <tr><td>Marques couvertes</td><td><span class="badge badge-purple">3</span></td></tr>
             </tbody>
           </table>
-          <div class="section-label" style="font-size:9px;margin-bottom:6px;">Répartition à vérifier</div>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <div style="display:flex;align-items:center;gap:8px;font-size:11px;">
-              <span style="min-width:120px;color:#374151;">Agents support</span>
-              <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:85%;background:#22C55E;"></div></div>
-              <span style="min-width:24px;color:#9CA3AF;text-align:right;font-size:10px;">~35</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:11px;">
-              <span style="min-width:120px;color:#374151;">Admins / managers</span>
-              <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:12%;background:#F97316;"></div></div>
-              <span style="min-width:24px;color:#9CA3AF;text-align:right;font-size:10px;">~5</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:11px;">
-              <span style="min-width:120px;color:#374151;">Comptes fonctionnels</span>
-              <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:3%;background:#EAB308;"></div></div>
-              <span style="min-width:24px;color:#9CA3AF;text-align:right;font-size:10px;">~1</span>
-            </div>
+          <div class="section-label" style="font-size:9px;margin-bottom:6px;">Répartition par rôle (à confirmer via API)</div>
+          <table style="margin-bottom:10px;">
+            <thead><tr><th>Rôle</th><th>Capacités</th><th>Nb estimé</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-orange">Admin</span></td><td style="font-size:10px;color:#374151;">Accès total configuration</td><td style="text-align:center;font-weight:700;">~5</td></tr>
+              <tr><td><span class="badge badge-green">Agent</span></td><td style="font-size:10px;color:#374151;">Répond aux tickets, gère les files</td><td style="text-align:center;font-weight:700;">~35</td></tr>
+              <tr><td><span class="badge badge-blue">Light Agent</span></td><td style="font-size:10px;color:#374151;">Notes internes uniquement, pas de réponse client</td><td style="text-align:center;font-weight:700;">?</td></tr>
+            </tbody>
+          </table>
+          <div class="alert alert-indigo" style="margin-bottom:8px;">
+            <div class="alert-title" style="font-size:11px;">💡 Light Agents : rôle limité à documenter</div>
+            <div class="alert-body">Les <strong>Light Agents</strong> ne peuvent qu'ajouter des <strong>notes internes</strong> sur les tickets : ils ne répondent pas aux clients et ne gèrent pas les files. Important à distinguer dans les rapports de productivité : leurs tickets ne comptent pas comme "traités". Vérifier combien de Light Agents sont actifs dans ce compte.</div>
           </div>
-          <div class="alert alert-yellow" style="margin-top:10px;margin-bottom:0;">
+          <div class="alert alert-yellow" style="margin-bottom:0;">
             <div class="alert-title" style="font-size:11px;">⚠ Points de vigilance agents</div>
             <div class="alert-body">Vérifier qu'aucun compte test n'est actif en production, que les agents inactifs sont désactivés (chaque agent inactif consomme une licence), et que les droits admin sont limités au strict nécessaire.</div>
           </div>
@@ -758,9 +753,8 @@
             <tbody>
               <tr><td>📧 Email</td><td><span class="badge badge-green">Principal</span></td></tr>
               <tr><td>📞 Voix / Téléphone</td><td><span class="badge badge-green">Actif (macros VM)</span></td></tr>
-              <tr><td>💬 Web Widget / Messaging</td><td><span class="badge badge-yellow">À vérifier</span></td></tr>
+              <tr><td>💬 Web Widget / Chat</td><td><span class="badge badge-green">Actif (basique, sans AI Agent)</span></td></tr>
               <tr><td>📱 Réseaux sociaux</td><td><span class="badge badge-gray">Non détecté</span></td></tr>
-              <tr><td>💬 Chat en direct</td><td><span class="badge badge-yellow">Basique (sans AI Agent)</span></td></tr>
             </tbody>
           </table>
           <div class="alert alert-red" style="margin-top:8px;margin-bottom:0;">
@@ -1015,7 +1009,7 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Help Center : branding Zendesk non supprimé, mise en page dupliquée (Guide center name actif)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Explore : aucun dashboard personnalisé, aucun rapport sur statuts ou champs personnalisés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Vues bien structurées. Ajouter : tickets non assignés, recently updated, high priority, SLA breach (post-SLA) + emojis pour la lisibilité</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Web Widget / Messaging : présence et configuration à confirmer</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Web Widget actif (chat basique sans AI Agent) : vérifier le nombre de Light Agents et leur rôle réel dans le compte</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Apps : Time Tracking désactivé, liste complète à auditer, désinstaller les apps inutilisées</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">14 statuts personnalisés : "Approuvé - en attente facturation" et "Terminé - envoyé en facturation" à recatégoriser en On-Hold, et volume à valider avec l'équipe</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Copilot Studio (Microsoft) opérationnel et connecté</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
