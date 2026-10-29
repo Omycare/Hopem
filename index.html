@@ -233,7 +233,6 @@
         <ul class="check-list cross-list">
           <li><strong>0 politique SLA</strong> : aucun engagement de délai mesuré, rapports de performance inutilisables</li>
           <li><strong>Aucun horaire de travail (schedule)</strong> : prérequis indispensable au SLA, absent du compte</li>
-          <li><strong>Automations GenAI inactives</strong> : [GenAI] Rappel et [GenAI] Résolution configurées mais désactivées</li>
           <li><strong>37% de tickets Urgent/High</strong> : taux anormalement élevé, possible surclassement automatique</li>
           <li><strong>Formulaire Space inactif</strong> : marque Praeneste-Space active mais son formulaire désactivé</li>
           <li><strong>Notifications pending désactivées</strong> : relances 24h et 5 jours inactives</li>
@@ -284,7 +283,7 @@
 <div class="slide" id="slide-3">
   <div class="slide-header">
     <h2>🔴 Urgences critiques : points prioritaires identifiés</h2>
-    <span class="sh-badge">2 URGENCES C1 · 2 URGENCES C2 · PRIORITÉ MAX</span>
+    <span class="sh-badge">2 URGENCES C1 · 1 URGENCE C2 · PRIORITÉ MAX</span>
   </div>
   <div class="slide-body">
     <div class="alert alert-red">
@@ -316,22 +315,6 @@
       </div>
     </div>
 
-    <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C2</span> Automations GenAI configurées mais inactives</div>
-      <div class="alert-body">
-        Deux automations liées à l'IA générative existent dans le compte mais sont <strong>toutes deux désactivées</strong> :
-        <br><br>
-        <table>
-          <thead><tr><th>Automation GenAI</th><th>Statut</th><th>Impact</th></tr></thead>
-          <tbody>
-            <tr><td>[GenAI] Rappel via la réponse automatique avec l'IA générative</td><td><span class="badge badge-red">Inactive</span></td><td>Relances clients non envoyées par IA</td></tr>
-            <tr><td>[GenAI] Résolution via la réponse automatique avec l'IA générative</td><td><span class="badge badge-red">Inactive</span></td><td>Résolution automatique non déclenchée</td></tr>
-          </tbody>
-        </table>
-        <br>Ces fonctionnalités font probablement partie du plan souscrit. Leur non-activation représente un coût d'opportunité direct : réduction du volume de tickets simples traités manuellement, accélération du délai de résolution, et amélioration du CSAT déjà excellent (91%).
-        <br><br><strong>Action :</strong> Vérifier les conditions de déclenchement de ces automations, les adapter au contexte Hopem (produits Primmo/Space/Copernic), et les activer. <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/automations" target="_blank" class="zd-link">↗ Automations</a>
-      </div>
-    </div>
     <div class="alert alert-red">
       <div class="alert-title"><span class="badge badge-red">C2</span> 3 adresses email connectées mais non fonctionnelles</div>
       <div class="alert-body">
@@ -465,8 +448,8 @@
               <tr><td><span class="badge badge-green">ON</span></td><td>Demander note CSAT (automatisme système)</td></tr>
               <tr><td><span class="badge badge-red">OFF ⚠</span></td><td>Notification en attente 24h</td></tr>
               <tr><td><span class="badge badge-red">OFF ⚠</span></td><td>Notification en attente 5 jours</td></tr>
-              <tr><td><span class="badge badge-red">OFF ⚠</span></td><td>[GenAI] Rappel automatique IA générative</td></tr>
-              <tr><td><span class="badge badge-red">OFF ⚠</span></td><td>[GenAI] Résolution automatique IA générative</td></tr>
+              <tr><td><span class="badge badge-gray">OFF</span></td><td>[GenAI] Rappel automatique IA générative</td></tr>
+              <tr><td><span class="badge badge-gray">OFF</span></td><td>[GenAI] Résolution automatique IA générative</td></tr>
             </tbody>
           </table>
         </div>
@@ -933,14 +916,14 @@
               <tr><td>Entity detection (Gamme + Module)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>Copilot Studio : Agent billets</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>MP Dashboard Claude 1</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
-              <tr><td>[GenAI] Rappel automatique</td><td><span class="badge badge-red">Inactif ⚠</span></td></tr>
-              <tr><td>[GenAI] Résolution automatique</td><td><span class="badge badge-red">Inactif ⚠</span></td></tr>
+              <tr><td>[GenAI] Rappel automatique</td><td><span class="badge badge-gray">Off</span></td></tr>
+              <tr><td>[GenAI] Résolution automatique</td><td><span class="badge badge-gray">Off</span></td></tr>
               <tr><td>AI Agent (Chat)</td><td><span class="badge badge-red">Non configuré ⚠</span></td></tr>
             </tbody>
           </table>
           <div class="alert alert-orange" style="margin-top:10px;">
             <div class="alert-title">⚠ L'IA enrichit mais n'agit pas encore</div>
-            <div class="alert-body">Langue, sentiment, intention et entités sont détectés automatiquement. Les automations GenAI sont la prochaine étape pour transformer ces données en actions concrètes.</div>
+            <div class="alert-body">Langue, sentiment, intention et entités sont détectés automatiquement sur chaque ticket entrant.</div>
           </div>
         </div>
 
@@ -1011,7 +994,6 @@
         <table style="width:100%;border-collapse:collapse;font-size:10px;">
           <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
           <tbody>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Automations GenAI configurées mais inactives : Rappel et Résolution automatique</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">37% des tickets classés Urgent ou High : taux anormal, possible surclassement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Auto-Solve à 240 jours : délai excessif, standard recommandé 30 à 60 jours</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Relances "pending" désactivées : notifications 24h et 5 jours inactives</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
@@ -1069,7 +1051,6 @@
         <div class="card">
           <div class="section-label" style="color:#F97316;">🟠 Points importants (C2-C4)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Supprimer ou corriger le trigger cassé ID 44070561790491 (agent + groupe inexistants)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Activer les automations GenAI : Rappel et Résolution automatique par IA</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Activer le formulaire Space et ajouter les champs spécifiques Praeneste</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Recalibrer les critères de priorité pour ramener Urgent/High sous 15%</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Activer les notifications pending 24h et 5 jours</span></div>
