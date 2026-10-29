@@ -224,8 +224,6 @@
           <li>Zendesk AI actif : langue, sentiment, intention + 2 entités métier (Gamme, Module Primmo) détectées automatiquement sur chaque ticket</li>
           <li>Architecture multi-brand cohérente : Hopem, Copernic, Praeneste-Space</li>
           <li>Routage produit structuré via triggers dédiés par logiciel (Primmo, Abak, SyMo, ProMenu, Space, Diligence)</li>
-          <li>14 statuts personnalisés reflétant un workflow facturation et approbation complet</li>
-          <li>20 macros toutes actives, bibliothèque propre et sans doublons</li>
           <li>Help Center : 25 articles publiés + 22 procédures Copilot couvrant les processus métier clés (baux, facturation, signature électronique)</li>
           <li>Intégration Copilot Studio active + génération automatique de procédures IA hebdomadaire</li>
         </ul>
@@ -485,15 +483,21 @@
             <span class="tag" style="background:#F3F4F6;color:#6B7280;text-decoration:line-through;">Facturé (open) ⚠ OFF</span>
             <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">En attente retour client</span>
             <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">En attente d'approbation</span>
-            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">Approuvé - en attente facturation</span>
-            <span class="tag" style="background:#DBEAFE;border-color:#93C5FD;color:#1E40AF;">Terminé - envoyé en facturation</span>
+            <span class="tag" style="background:#FEF3C7;border-color:#FCD34D;color:#92400E;">Approuvé - en attente facturation ⚠</span>
+            <span class="tag" style="background:#FEF3C7;border-color:#FCD34D;color:#92400E;">Terminé - envoyé en facturation ⚠</span>
             <span class="tag" style="background:#1F2937;border-color:#374151;color:#F9FAFB;">En suspens</span>
             <span class="tag" style="background:#F3F4F6;border-color:#D1D5DB;color:#6B7280;">Résolu/Fermé</span>
             <span class="tag" style="background:#F3F4F6;border-color:#D1D5DB;color:#6B7280;">Facturé - Terminé</span>
           </div>
-          <div class="alert alert-indigo" style="margin-bottom:0;">
-            <div class="alert-title">💡 Statuts Pending : impact sur le SLA</div>
-            <div class="alert-body">Les statuts mappés sur "En attente" (Pending) <strong>mettent le SLA en pause</strong> une fois les SLA activés. S'assurer que "En attente d'approbation", "Approuvé en attente facturation" et "Terminé envoyé en facturation" sont bien catégorisés pour éviter des effets involontaires sur les métriques.</div>
+          <div class="alert alert-yellow" style="margin-bottom:8px;">
+            <div class="alert-title">⚠ 2 statuts mal catégorisés : devraient être On-Hold</div>
+            <div class="alert-body">
+              Les statuts <strong>"Approuvé - en attente facturation"</strong> et <strong>"Terminé - envoyé en facturation"</strong> représentent des étapes purement internes où l'équipe attend une action interne (pas le client). Ils devraient être mappés sur la catégorie <strong>On-Hold</strong> (en suspens) plutôt que Pending (en attente) : cela évite d'envoyer des relances automatiques au client pour des tickets bloqués en interne, et garantit que le SLA est correctement mis en pause pour les bonnes raisons.
+            </div>
+          </div>
+          <div class="alert alert-yellow" style="margin-bottom:0;">
+            <div class="alert-title">⚠ 14 statuts personnalisés : à valider avec l'équipe</div>
+            <div class="alert-body">14 statuts est un nombre élevé. À discuter : est-ce que chaque statut est réellement utilisé et compris par tous les agents ? Des statuts redondants ou peu clairs complexifient l'expérience agent et peuvent fausser les rapports. Un audit des statuts actifs et de leur fréquence d'utilisation (via Explore) est recommandé.</div>
           </div>
         </div>
 
@@ -1042,7 +1046,7 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Vues : pas d'emojis pour identifier rapidement les files par marque ou type</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Web Widget / Messaging : présence et configuration à confirmer</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Apps : Time Tracking désactivé, liste complète à auditer, désinstaller les apps inutilisées</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">14 statuts personnalisés reflétant le workflow facturation complet</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">14 statuts personnalisés : "Approuvé - en attente facturation" et "Terminé - envoyé en facturation" à recatégoriser en On-Hold, et volume à valider avec l'équipe</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Copilot Studio (Microsoft) opérationnel et connecté</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">22 procédures Copilot publiées : processus métier clés documentés pour l'auto-assist</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr><td style="padding:5px 6px;color:#166534;">Help Center : 25 articles publiés sur Primmo et Space, bon démarrage</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
@@ -1084,6 +1088,8 @@
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Corriger ou supprimer la macro cassée (ID 56259459929755), organiser en dossiers ("::"), ajouter contenu dynamique sur Boite vocale</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Ajouter des labels aux articles HC (requis pour le fonctionnement de Copilot AI)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Auditer les apps installées et désinstaller les apps non utilisées</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Recatégoriser "Approuvé - en attente facturation" et "Terminé - envoyé en facturation" en statut <strong>On-Hold</strong> (pas Pending) pour éviter des relances client automatiques sur des blocages internes</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Auditer l'utilisation réelle des 14 statuts personnalisés via Explore — valider leur pertinence avec l'équipe</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Clarifier ou renommer le groupe "SP", vérifier les membres de chaque groupe</span></div>
         </div>
 
