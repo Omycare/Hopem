@@ -838,12 +838,11 @@
               <tr><td>Articles publiés</td><td>25</td><td><span class="badge badge-green">Démarrage</span></td></tr>
               <tr><td>Brouillons</td><td><strong style="color:#EF4444;">37</strong></td><td><span class="badge badge-red">À réviser ⚠</span></td></tr>
               <tr><td>Archivés</td><td>25</td><td><span class="badge badge-gray">Nettoyage OK</span></td></tr>
-              <tr><td>Catégories</td><td>2 (Primmo, Space)</td><td><span class="badge badge-yellow">Incomplet</span></td></tr>
+              <tr><td>Catégories</td><td>Primmo + Space</td><td><span class="badge badge-yellow">Copernic/Abak : à créer</span></td></tr>
               <tr><td>Copernic couvert</td><td>Non</td><td><span class="badge badge-red">Manquant</span></td></tr>
               <tr><td>Abak couvert</td><td>Non</td><td><span class="badge badge-red">Manquant</span></td></tr>
-              <tr><td>Labels sur articles</td><td>À vérifier</td><td><span class="badge badge-yellow">Requis Copilot</span></td></tr>
+              <tr><td>Labels sur articles</td><td>Présents</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>Branding HC</td><td>Encore Zendesk</td><td><span class="badge badge-yellow">À personnaliser</span></td></tr>
-              <tr><td>Mise en page</td><td>Dupliquée (Guide name)</td><td><span class="badge badge-yellow">À corriger</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -930,36 +929,37 @@
               <tr><td>AI Agent (Chat)</td><td><span class="badge badge-red">Non configuré ⚠</span></td></tr>
             </tbody>
           </table>
-          <div class="alert alert-orange" style="margin-top:10px;">
-            <div class="alert-title">⚠ L'IA enrichit mais n'agit pas encore</div>
-            <div class="alert-body">Langue, sentiment, intention et entités sont détectés automatiquement sur chaque ticket entrant.</div>
-          </div>
-        </div>
 
-        <div class="card" style="margin-top:10px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <div class="section-label" style="margin:0;">Admin Copilot : Recommandations <a href="https://hopem-55629.zendesk.com/admin/ai/admin-copilot/recommendations" target="_blank" class="zd-link">↗</a></div>
-            <div style="display:flex;gap:5px;"><span class="badge badge-orange">30 disponibles</span><span class="badge badge-red">0 appliquées</span></div>
-          </div>
-          <table>
-            <thead><tr><th>Recommandation</th><th>Gain estimé</th><th>Type</th></tr></thead>
-            <tbody>
-              <tr><td style="font-size:10px;">Prioritize tickets: Unable to login</td><td style="font-size:10px;color:#166534;font-weight:600;">-24 min</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
-              <tr><td style="font-size:10px;">Route tickets to group: Assistance</td><td style="font-size:10px;color:#166534;font-weight:600;">-5h 10m</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
-              <tr><td style="font-size:10px;">Route negative sentiment to Assistance</td><td style="font-size:10px;color:#166534;font-weight:600;">-2h 8m</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
-              <tr><td style="font-size:10px;">Route language tickets to Support Applicatif</td><td style="font-size:10px;color:#166534;font-weight:600;">-44 min</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
-              <tr><td style="font-size:10px;color:#6B7280;">+ 26 autres recommandations disponibles</td><td></td><td><span class="badge badge-gray" style="font-size:9px;">Topic / Trigger</span></td></tr>
-            </tbody>
-          </table>
-          <div class="alert alert-indigo" style="margin-top:8px;margin-bottom:0;">
-            <div class="alert-title" style="font-size:11px;">💡 30 optimisations prêtes à appliquer</div>
-            <div class="alert-body">Zendesk analyse les données de tickets en temps réel et propose des améliorations concrètes de triggers et de routage avec des gains chiffrés. Aucune recommandation n'a encore été sauvegardée ni appliquée. Planifier une session de revue pour activer les recommandations les plus impactantes.</div>
-          </div>
         </div>
 
       </div>
 
     </div>
+
+    <!-- Admin Copilot : full width below -->
+    <div class="card" style="margin-top:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div class="section-label" style="margin:0;">Admin Copilot : Recommandations <a href="https://hopem-55629.zendesk.com/admin/ai/admin-copilot/recommendations" target="_blank" class="zd-link">↗</a></div>
+        <div style="display:flex;gap:5px;"><span class="badge badge-orange">30 disponibles</span><span class="badge badge-red">0 appliquées</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;">
+        <table>
+          <thead><tr><th>Recommandation</th><th>Gain estimé</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td style="font-size:10px;">Prioritize tickets: Unable to login</td><td style="font-size:10px;color:#166534;font-weight:600;">-24 min</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
+            <tr><td style="font-size:10px;">Route tickets to group: Assistance</td><td style="font-size:10px;color:#166534;font-weight:600;">-5h 10m</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
+            <tr><td style="font-size:10px;">Route negative sentiment to Assistance</td><td style="font-size:10px;color:#166534;font-weight:600;">-2h 8m</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
+            <tr><td style="font-size:10px;">Route language tickets to Support Applicatif</td><td style="font-size:10px;color:#166534;font-weight:600;">-44 min</td><td><span class="badge badge-purple" style="font-size:9px;">Trigger</span></td></tr>
+            <tr><td style="font-size:10px;color:#6B7280;">+ 26 autres recommandations disponibles</td><td></td><td><span class="badge badge-gray" style="font-size:9px;">Topic / Trigger</span></td></tr>
+          </tbody>
+        </table>
+        <div class="alert alert-indigo" style="margin-bottom:0;">
+          <div class="alert-title">💡 30 optimisations prêtes à appliquer</div>
+          <div class="alert-body">Zendesk analyse les données de tickets en temps réel et propose des améliorations concrètes de triggers et de routage avec des gains chiffrés. Aucune recommandation n'a encore été sauvegardée ni appliquée. Planifier une session de revue pour activer les recommandations les plus impactantes.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1030,7 +1030,7 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucun AI Agent Chat configuré : le chat propose uniquement des réponses basiques sans résolution autonome</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 37 brouillons non publiés, plus de brouillons que d'articles publiés (25)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : Copernic et Abak sans documentation libre-service</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Labels HC à vérifier : sans labels, Copilot ne suggère aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Labels HC présents : Copilot peut suggérer des articles</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Articles avec captures d'écran sans texte : non exploitables par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Help Center : branding Zendesk non supprimé, mise en page dupliquée (Guide center name actif)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Explore : aucun dashboard personnalisé, aucun rapport sur statuts ou champs personnalisés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
