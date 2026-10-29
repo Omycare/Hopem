@@ -286,7 +286,7 @@
 <div class="slide" id="slide-3">
   <div class="slide-header">
     <h2>🔴 Urgences critiques : points prioritaires identifiés</h2>
-    <span class="sh-badge">2 URGENCES C1 · 1 URGENCE C2 · PRIORITÉ MAX</span>
+    <span class="sh-badge">2 URGENCES C1 · 2 URGENCES C2 · PRIORITÉ MAX</span>
   </div>
   <div class="slide-body">
     <div class="alert alert-red">
@@ -334,6 +334,24 @@
         <br><br><strong>Action :</strong> Vérifier les conditions de déclenchement de ces automations, les adapter au contexte Hopem (produits Primmo/Space/Copernic), et les activer. <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/automations" target="_blank" class="zd-link">↗ Automations</a>
       </div>
     </div>
+    <div class="alert alert-red">
+      <div class="alert-title"><span class="badge badge-red">C2</span> 3 adresses email connectées mais non fonctionnelles</div>
+      <div class="alert-body">
+        L'audit manuel révèle que trois adresses email sont configurées dans Zendesk mais ne fonctionnent pas : elles acceptent les messages mais les tickets ne parviennent pas aux agents.
+        <br><br>
+        <table>
+          <thead><tr><th>Adresse email</th><th>Marque associée</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td>support@praeneste.com</td><td>Praeneste - Space</td><td><span class="badge badge-red">Non fonctionnelle ⚠</span></td></tr>
+            <tr><td>support@copernic.com</td><td>Copernic</td><td><span class="badge badge-red">Non fonctionnelle ⚠</span></td></tr>
+            <tr><td>info@hopem.com</td><td>Hopem</td><td><span class="badge badge-red">Non fonctionnelle ⚠</span></td></tr>
+          </tbody>
+        </table>
+        <br>Les clients qui écrivent à ces adresses ne reçoivent aucun accusé de réception et leur demande n'est jamais traitée. Impact direct sur le CSAT et la perception du service.
+        <br><br><strong>Action immédiate :</strong> Vérifier dans Admin Center &gt; Canaux &gt; Email la configuration de chaque adresse (forwarding, DNS). Tester chaque adresse et corriger la connexion ou rediriger vers une adresse fonctionnelle.
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -476,6 +494,26 @@
           <div class="alert alert-indigo" style="margin-bottom:0;">
             <div class="alert-title">💡 Statuts Pending : impact sur le SLA</div>
             <div class="alert-body">Les statuts mappés sur "En attente" (Pending) <strong>mettent le SLA en pause</strong> une fois les SLA activés. S'assurer que "En attente d'approbation", "Approuvé en attente facturation" et "Terminé envoyé en facturation" sont bien catégorisés pour éviter des effets involontaires sur les métriques.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-label">Points à corriger sur les triggers</div>
+          <div class="alert alert-red" style="margin-bottom:8px;">
+            <div class="alert-title">🔴 Trigger cassé : agent et groupe inexistants <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/triggers/44070561790491" target="_blank" class="zd-link">↗ Voir</a></div>
+            <div class="alert-body">Le trigger <strong>ID 44070561790491</strong> référence un agent assigné et un groupe qui n'existent plus dans le compte. Ce trigger s'exécute sans effet utile et peut générer des erreurs silencieuses. À supprimer ou corriger immédiatement.</div>
+          </div>
+          <div class="alert alert-yellow" style="margin-bottom:8px;">
+            <div class="alert-title">⚠ Type de demande vide : intentionnel ? <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/triggers/45723003376539" target="_blank" class="zd-link">↗ Voir</a></div>
+            <div class="alert-body">Le trigger <strong>ID 45723003376539</strong> laisse le champ "Type de demande" vide dans ses actions. À vérifier : est-ce intentionnel ou une valeur manquante par erreur ?</div>
+          </div>
+          <div class="alert alert-yellow" style="margin-bottom:8px;">
+            <div class="alert-title">⚠ Condition ANY avec valeur unique (logique incorrecte) <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/triggers/50833608265371" target="_blank" class="zd-link">↗</a> <a href="https://hopem-55629.zendesk.com/admin/objects-rules/rules/triggers/45711626064027" target="_blank" class="zd-link">↗</a></div>
+            <div class="alert-body">Les triggers <strong>50833608265371</strong> et <strong>45711626064027</strong> utilisent une condition "ANY" avec une seule valeur. Une condition ANY avec une seule option devrait être ALL — le comportement est identique mais la lisibilité et la cohérence sont améliorées.</div>
+          </div>
+          <div class="alert alert-indigo" style="margin-bottom:0;">
+            <div class="alert-title">💡 Opportunité d'unification des triggers de routage</div>
+            <div class="alert-body">Les triggers "Assistance Technique + Abak", "Assistance Technique + Primmo", "Assistance Technique + SyMo", etc. envoient tous vers le même groupe. Un seul trigger avec une condition "gamme est l'une de : [Abak, Primmo, SyMo, ProMenu...]" suffit — réduction de ~10 triggers en 2 (un par type de demande).</div>
           </div>
         </div>
       </div>
@@ -668,7 +706,14 @@
               <tr><td>+ 13 autres macros actives</td></tr>
             </tbody>
           </table>
-          <div style="margin-top:8px;font-size:11px;color:#166534;">✓ Bibliothèque propre, 100% des macros actives</div>
+          <div class="alert alert-yellow" style="margin-top:8px;margin-bottom:0;">
+            <div class="alert-title" style="font-size:11px;">⚠ Points à corriger sur les macros</div>
+            <div class="alert-body">
+              <strong>Macro cassée</strong> (ID 56259459929755) : actions manquantes, à corriger ou supprimer.<br>
+              <strong>Pas de structure de dossiers</strong> : utiliser la notation "::" (ex: "Boite vocale::FR", "Boite vocale::EN") pour faciliter la navigation.<br>
+              <strong>Contenu dynamique manquant</strong> : les macros "Boite vocale" et "Boite vocale (anglais)" n'utilisent pas le contenu dynamique — à corriger pour la cohérence multilingue.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -738,9 +783,13 @@
               <tr><td>📞 Voix / Téléphone</td><td><span class="badge badge-green">Actif (macros VM)</span></td></tr>
               <tr><td>💬 Web Widget / Messaging</td><td><span class="badge badge-yellow">À vérifier</span></td></tr>
               <tr><td>📱 Réseaux sociaux</td><td><span class="badge badge-gray">Non détecté</span></td></tr>
-              <tr><td>💬 Chat en direct</td><td><span class="badge badge-gray">Non détecté</span></td></tr>
+              <tr><td>💬 Chat en direct</td><td><span class="badge badge-yellow">Basique (sans AI Agent)</span></td></tr>
             </tbody>
           </table>
+          <div class="alert alert-red" style="margin-top:8px;margin-bottom:0;">
+            <div class="alert-title">🔴 3 adresses email non fonctionnelles</div>
+            <div class="alert-body">support@praeneste.com · support@copernic.com · info@hopem.com sont connectées mais ne délivrent pas les tickets aux agents. Les clients écrivant à ces adresses ne reçoivent aucune réponse.</div>
+          </div>
           <div class="alert alert-blue" style="margin-top:8px;margin-bottom:0;">
             <div class="alert-title" style="font-size:11px;">📋 Vérifier la configuration email</div>
             <div class="alert-body">S'assurer que les enregistrements SPF, DKIM et DMARC sont correctement configurés pour l'adresse support@hopem.ca (ou équivalent). Une mauvaise configuration email réduit la délivrabilité des notifications clients.</div>
@@ -753,10 +802,17 @@
             <span class="tag">Copilot Studio (Microsoft)</span>
             <span class="tag">MP Dashboard Claude 1</span>
             <span class="tag">Zendesk AI (natif)</span>
+            <span class="tag">Attachment Plus</span>
+            <span class="tag">Advanced Search</span>
+            <span class="tag" style="background:#FEF3C7;border-color:#FDE68A;color:#92400E;">Time Tracking ⚠ inactif</span>
+          </div>
+          <div class="alert alert-red" style="margin-bottom:8px;">
+            <div class="alert-title" style="font-size:11px;">🔴 App "Select an address" manquante</div>
+            <div class="alert-body">Avec 3 marques et plusieurs adresses email, l'app <strong>Select an address</strong> est indispensable : elle permet à l'agent de choisir l'adresse d'envoi (Hopem / Praeneste / Copernic) dans le composer. Sans cette app, toutes les réponses partent de l'adresse par défaut, quelle que soit la marque du ticket.</div>
           </div>
           <div class="alert alert-yellow" style="margin-bottom:0;">
-            <div class="alert-title" style="font-size:11px;">❓ Liste complète à auditer</div>
-            <div class="alert-body">Vérifier la liste complète dans Admin Center. Désinstaller toute app non utilisée : chaque app consomme des ressources et peut représenter un risque sécurité (accès aux données tickets).</div>
+            <div class="alert-title" style="font-size:11px;">⚠ Pied de page email : watermark Zendesk</div>
+            <div class="alert-body">Le template email contient encore le watermark Zendesk dans le pied de page. À remplacer par les couleurs et la charte graphique Hopem pour une image de marque professionnelle.</div>
           </div>
         </div>
       </div>
@@ -790,6 +846,8 @@
               <tr><td>Copernic couvert</td><td>Non</td><td><span class="badge badge-red">Manquant</span></td></tr>
               <tr><td>Abak couvert</td><td>Non</td><td><span class="badge badge-red">Manquant</span></td></tr>
               <tr><td>Labels sur articles</td><td>À vérifier</td><td><span class="badge badge-yellow">Requis Copilot</span></td></tr>
+              <tr><td>Branding HC</td><td>Encore Zendesk</td><td><span class="badge badge-yellow">À personnaliser</span></td></tr>
+              <tr><td>Mise en page</td><td>Dupliquée (Guide name)</td><td><span class="badge badge-yellow">À corriger</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -873,6 +931,7 @@
               <tr><td>MP Dashboard Claude 1</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>[GenAI] Rappel automatique</td><td><span class="badge badge-red">Inactif ⚠</span></td></tr>
               <tr><td>[GenAI] Résolution automatique</td><td><span class="badge badge-red">Inactif ⚠</span></td></tr>
+              <tr><td>AI Agent (Chat)</td><td><span class="badge badge-red">Non configuré ⚠</span></td></tr>
             </tbody>
           </table>
           <div class="alert alert-orange" style="margin-top:10px;">
@@ -912,7 +971,7 @@
 <div class="slide" id="slide-10">
   <div class="slide-header">
     <h2>📋 Synthèse &amp; Plan d'action</h2>
-    <span class="sh-badge">3 DOMAINES · 2 CRITIQUES · 5 IMPORTANTS</span>
+    <span class="sh-badge">3 DOMAINES · 3 CRITIQUES · 9 IMPORTANTS</span>
   </div>
   <div class="slide-body" style="padding:10px 16px 72px;">
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
@@ -929,10 +988,13 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucun schedule (horaire de travail) : prérequis SLA absent</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire Space inactif alors que la marque Praeneste-Space est active</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">31 vues inactives sur 62 : vues système jamais utilisées ni personnalisées</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;"><strong>3 adresses email non fonctionnelles</strong> : support@praeneste.com, support@copernic.com, info@hopem.com — tickets jamais reçus par les agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">App "Select an address" absente : réponses multi-marque envoyées depuis l'adresse par défaut</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Pied de page email avec watermark Zendesk : image de marque non professionnelle</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">SPF / DKIM / DMARC : délivrabilité email à vérifier</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Groupe "SP" : nom non descriptif, rôle non documenté</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Architecture multi-brand cohérente : 3 marques, 9 groupes</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
-            <tr><td style="padding:5px 6px;color:#166534;">20 macros actives, bibliothèque propre et sans doublons</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr><td style="padding:5px 6px;color:#374151;">20 macros actives (dont 1 cassée) — structure de dossiers et contenu dynamique à ajouter</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -949,6 +1011,11 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">37% des tickets classés Urgent ou High : taux anormal, possible surclassement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Auto-Solve à 240 jours : délai excessif, standard recommandé 30 à 60 jours</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Relances "pending" désactivées : notifications 24h et 5 jours inactives</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;"><strong>Trigger cassé</strong> (ID 44070561790491) : agent et groupe assignés n'existent plus dans le compte</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucune notification client avant résolution automatique : passage direct Pending → Résolu sans avertissement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Macros sans structure de dossiers ("::"), macro cassée (ID 56259459929755), contenu dynamique absent sur Boite vocale</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">2 triggers avec condition ANY au lieu de ALL pour une seule valeur (logique incorrecte)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Triggers de routage à unifier : 1 trigger par gamme, alors qu'un seul trigger multi-gamme suffit par type de demande</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Intent confidence "low" sur 1 271 tickets : modèles d'intention à entraîner</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Tri IA actif : langue, sentiment, intention + 2 entités métier (Gamme, Module Primmo)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">CSAT 91% : score remarquable pour un support logiciel B2B</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
@@ -965,12 +1032,16 @@
         <table style="width:100%;border-collapse:collapse;font-size:10px;">
           <thead><tr style="background:#F3F4F6;"><th style="text-align:left;padding:4px 6px;font-weight:600;color:#374151;">Observation</th><th style="padding:4px 6px;white-space:nowrap;">Priorité</th></tr></thead>
           <tbody>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucun AI Agent Chat configuré : le chat propose uniquement des réponses basiques sans résolution autonome</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : 37 brouillons non publiés, plus de brouillons que d'articles publiés (25)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">HC : Copernic et Abak sans documentation libre-service</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Labels HC à vérifier : sans labels, Copilot ne suggère aucun article</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Articles avec captures d'écran sans texte : non exploitables par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Help Center : branding Zendesk non supprimé, mise en page dupliquée (Guide center name actif)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Explore : aucun dashboard personnalisé, aucun rapport sur statuts ou champs personnalisés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Vues : pas d'emojis pour identifier rapidement les files par marque ou type</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Web Widget / Messaging : présence et configuration à confirmer</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Apps installées : liste à auditer, apps non utilisées à désinstaller</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Faible</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Apps : Time Tracking désactivé, liste complète à auditer, désinstaller les apps inutilisées</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">14 statuts personnalisés reflétant le workflow facturation complet</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Copilot Studio (Microsoft) opérationnel et connecté</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">22 procédures Copilot publiées : processus métier clés documentés pour l'auto-assist</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
@@ -986,12 +1057,14 @@
       <div>
         <div class="card" style="margin-bottom:10px;">
           <div class="section-label" style="color:#EF4444;">🔴 Priorité critique (C1)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Reconfigurer les 3 adresses email non fonctionnelles : support@praeneste.com, support@copernic.com, info@hopem.com (vérifier DNS forwarding + connexion Zendesk)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer le schedule "Heures ouvrées EST" Lundi-Vendredi 8h-17h (prérequis SLA)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C1]</strong> Créer les politiques SLA : Urgent 1h réponse / 4h résolution, Normal 8h / 48h, liées au schedule</span></div>
         </div>
 
         <div class="card">
           <div class="section-label" style="color:#F97316;">🟠 Points importants (C2-C4)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Supprimer ou corriger le trigger cassé ID 44070561790491 (agent + groupe inexistants)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Activer les automations GenAI : Rappel et Résolution automatique par IA</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Activer le formulaire Space et ajouter les champs spécifiques Praeneste</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Recalibrer les critères de priorité pour ramener Urgent/High sous 15%</span></div>
@@ -1004,7 +1077,11 @@
         <div class="card" style="margin-bottom:10px;">
           <div class="section-label" style="color:#EAB308;">🟡 Améliorations (C5-C6)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Supprimer / archiver les 31 vues inactives, créer des vues par marque</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Installer l'app "Select an address" (Admin Center &gt; Apps) pour permettre aux agents de choisir l'adresse d'envoi selon la marque</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Ajouter une automation de notification avant auto-résolution : prévenir le client X jours avant le passage automatique Pending → Résolu</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Vérifier la configuration SPF, DKIM et DMARC pour l'adresse email support</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Supprimer le watermark Zendesk du footer email — appliquer la charte graphique Hopem</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Corriger ou supprimer la macro cassée (ID 56259459929755), organiser en dossiers ("::"), ajouter contenu dynamique sur Boite vocale</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Ajouter des labels aux articles HC (requis pour le fonctionnement de Copilot AI)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Auditer les apps installées et désinstaller les apps non utilisées</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Clarifier ou renommer le groupe "SP", vérifier les membres de chaque groupe</span></div>
@@ -1012,11 +1089,15 @@
 
         <div class="card">
           <div class="section-label" style="color:#22C55E;">🟢 Optimisations (C7+)</div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C6]</strong> Personnaliser le branding Help Center (supprimer le watermark Zendesk, corriger la mise en page dupliquée)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Créer les articles HC pour Copernic et Abak</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C7]</strong> Configurer les Workspaces contextuels par produit (Primmo, Space, Copernic)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Entraîner les modèles d'intention IA (intent confidence souvent "low")</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Configurer le routage par compétences (niveau 1/2/3 et module logiciel)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Déployer un dashboard Explore pour le suivi SLA et CSAT par produit</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Créer des dashboards Explore personnalisés (SLA, CSAT, volume par statut personnalisé et par champ métier)</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Unifier les triggers de routage : remplacer les triggers par gamme par 1 trigger par type de demande avec condition multi-gamme</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Configurer un AI Agent Chat pour la résolution autonome des demandes simples</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Ajouter des emojis aux vues pour identifier rapidement les files par marque et type</span></div>
         </div>
       </div>
     </div>
