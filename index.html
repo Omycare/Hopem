@@ -221,7 +221,7 @@
         <div class="section-label">✓ Points forts</div>
         <ul class="check-list">
           <li>CSAT de <strong>91%</strong> : score remarquable pour un support logiciel B2B</li>
-          <li>Zendesk AI actif : détection automatique de la langue, intention et sentiment sur chaque ticket</li>
+          <li>Zendesk AI actif : langue, sentiment, intention + 2 entités métier (Gamme, Module Primmo) détectées automatiquement sur chaque ticket</li>
           <li>Architecture multi-brand cohérente : Hopem, Copernic, Praeneste-Space</li>
           <li>Routage produit structuré via triggers dédiés par logiciel (Primmo, Abak, SyMo, ProMenu, Space, Diligence)</li>
           <li>14 statuts personnalisés reflétant un workflow facturation et approbation complet</li>
@@ -841,18 +841,25 @@
       <!-- COL 3 : IA Tags + Intégrations -->
       <div>
         <div class="card" style="margin-bottom:10px;">
-          <div class="section-label">Zendesk AI : Tri intelligent actif</div>
+          <div class="section-label">Intelligent Triage : état complet</div>
           <table>
-            <thead><tr><th>Tag IA détecté</th><th>Occ.</th><th>Signal</th></tr></thead>
+            <thead><tr><th>Fonctionnalité</th><th>Détail</th><th>Statut</th></tr></thead>
             <tbody>
-              <tr><td>language__fr</td><td style="font-weight:700;">2 045</td><td><span class="badge badge-green">FR dominant</span></td></tr>
-              <tr><td>language_confidence__high</td><td style="font-weight:700;">1 997</td><td><span class="badge badge-green">Bonne confiance</span></td></tr>
-              <tr><td>sentiment__neutral</td><td style="font-weight:700;">1 670</td><td><span class="badge badge-blue">Neutre</span></td></tr>
-              <tr><td>sentiment_confidence__high</td><td style="font-weight:700;">1 862</td><td><span class="badge badge-green">Bonne confiance</span></td></tr>
-              <tr><td>intent_confidence__low</td><td style="font-weight:700;">1 271</td><td><span class="badge badge-yellow">À entraîner ⚠</span></td></tr>
-              <tr><td>demande_expérience_client</td><td style="font-weight:700;">2 119</td><td><span class="badge badge-blue">Catégorie IA</span></td></tr>
+              <tr class="tcat"><td colspan="3">LANGUE & SENTIMENT</td></tr>
+              <tr><td>Langue</td><td style="font-size:10px;">FR dominant (2 045), confidence high</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
+              <tr><td>Sentiment</td><td style="font-size:10px;">Neutre (1 670), confidence high</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
+              <tr class="tcat"><td colspan="3">INTENTION</td></tr>
+              <tr><td>Intent</td><td style="font-size:10px;">demande_expérience_client (2 119)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
+              <tr><td>Intent confidence</td><td style="font-size:10px;color:#92400E;">1 271 tickets : confidence LOW ⚠</td><td><span class="badge badge-yellow">À entraîner</span></td></tr>
+              <tr class="tcat"><td colspan="3">ENTITÉS (ENTITIES)</td></tr>
+              <tr><td>Gamme</td><td style="font-size:10px;">Drop-down · détection automatique</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
+              <tr><td>Primmo-Hopem Immobilier Module</td><td style="font-size:10px;">Drop-down · détection automatique</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
             </tbody>
           </table>
+          <div class="alert alert-green" style="margin-top:8px;margin-bottom:0;">
+            <div class="alert-title" style="font-size:11px;">✅ Entity detection : point fort avancé</div>
+            <div class="alert-body">2 entités configurées et actives : l'IA détecte automatiquement la <strong>Gamme</strong> et le <strong>module Primmo-Hopem</strong> dans chaque ticket entrant. Ces entités peuvent alimenter le routage automatique et les suggestions Copilot avec une précision métier.</div>
+          </div>
         </div>
 
         <div class="card">
@@ -861,6 +868,7 @@
             <thead><tr><th>Intégration</th><th>Statut</th></tr></thead>
             <tbody>
               <tr><td>Zendesk AI Tri intelligent</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
+              <tr><td>Entity detection (Gamme + Module)</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>Copilot Studio : Agent billets</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>MP Dashboard Claude 1</td><td><span class="badge badge-green">Actif ✓</span></td></tr>
               <tr><td>[GenAI] Rappel automatique</td><td><span class="badge badge-red">Inactif ⚠</span></td></tr>
@@ -868,8 +876,8 @@
             </tbody>
           </table>
           <div class="alert alert-orange" style="margin-top:10px;">
-            <div class="alert-title">⚠ L'IA collecte mais n'agit pas encore</div>
-            <div class="alert-body">Le tri IA enrichit chaque ticket (langue, sentiment, intention) mais les automations GenAI sont désactivées. Activer les automations est la prochaine étape logique pour passer de la collecte à l'action.</div>
+            <div class="alert-title">⚠ L'IA enrichit mais n'agit pas encore</div>
+            <div class="alert-body">Langue, sentiment, intention et entités sont détectés automatiquement. Les automations GenAI sont la prochaine étape pour transformer ces données en actions concrètes.</div>
           </div>
         </div>
 
@@ -942,7 +950,7 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Auto-Solve à 240 jours : délai excessif, standard recommandé 30 à 60 jours</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Relances "pending" désactivées : notifications 24h et 5 jours inactives</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Intent confidence "low" sur 1 271 tickets : modèles d'intention à entraîner</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Tri IA actif : langue, sentiment et intention détectés automatiquement</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Tri IA actif : langue, sentiment, intention + 2 entités métier (Gamme, Module Primmo)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">CSAT 91% : score remarquable pour un support logiciel B2B</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
             <tr><td style="padding:5px 6px;color:#166534;">56 triggers, 46 actifs : routage produit structuré par logiciel</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
           </tbody>
