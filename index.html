@@ -234,11 +234,9 @@
           <li><strong>0 politique SLA</strong> : aucun engagement de délai mesuré, rapports de performance inutilisables</li>
           <li><strong>Aucun horaire de travail (schedule)</strong> : prérequis indispensable au SLA, absent du compte</li>
           <li><strong>37% de tickets Urgent/High</strong> : taux anormalement élevé, possible surclassement automatique</li>
-          <li><strong>Formulaire Space inactif</strong> : marque Praeneste-Space active mais son formulaire désactivé</li>
           <li><strong>Notifications pending désactivées</strong> : relances 24h et 5 jours inactives</li>
           <li><strong>Auto-solve à 240 jours</strong> : délai excessif vs standard de 30-60 jours</li>
           <li><strong>37 brouillons HC</strong> : plus de brouillons que d'articles publiés (25), à finaliser en priorité</li>
-          <li><strong>31 vues inactives</strong> sur 62 : dont des vues système Zendesk jamais utilisées</li>
         </ul>
 
         <div class="card" style="margin-top:14px;">
@@ -340,7 +338,7 @@
 <div class="slide" id="slide-4">
   <div class="slide-header">
     <h2>🟠 Points importants : Corrections prioritaires</h2>
-    <span class="sh-badge">5 POINTS · SEMAINE 1-2</span>
+    <span class="sh-badge">4 POINTS</span>
   </div>
   <div class="slide-body">
     <div class="alert alert-orange">
@@ -353,15 +351,7 @@
       </div>
     </div>
 
-    <div class="alert alert-orange">
-      <div class="alert-title"><span class="badge badge-orange">C4</span> Formulaire "Space" inactif malgré une marque active
-        <a href="https://hopem-55629.zendesk.com/admin/objects-rules/tickets/ticket-forms" target="_blank" class="zd-link">↗ Formulaires</a>
-      </div>
-      <div class="alert-body">
-        La marque <strong>Praeneste - Logiciel Space</strong> est active et opérationnelle, mais le <strong>formulaire de ticket Space est désactivé</strong>. Les clients Space soumettent donc leurs tickets via le formulaire Hopem par défaut, sans champs adaptés à leur produit. Cela empêche la collecte de données spécifiques (version, module concerné) et le routage automatique précis vers le groupe support Space.
-        <br><br><strong>Action :</strong> Activer le formulaire Space, ajouter les champs propres au produit Praeneste, et s'assurer que les triggers de routage l'utilisent comme condition. <a href="https://hopem-55629.zendesk.com/admin/objects-rules/tickets/ticket-forms" target="_blank" class="zd-link">↗ Formulaires</a>
-      </div>
-    </div>
+
 
     <div class="alert alert-yellow">
       <div class="alert-title"><span class="badge badge-yellow">C5</span> Notifications "En attente" désactivées : relances clients absentes
@@ -383,13 +373,7 @@
       </div>
     </div>
 
-    <div class="alert alert-yellow">
-      <div class="alert-title"><span class="badge badge-yellow">C6</span> 31 vues inactives sur 62 : interface agents encombrée</div>
-      <div class="alert-body">
-        <strong>31 des 62 vues sont inactives</strong>, dont de nombreuses vues système Zendesk par défaut jamais personnalisées (All unsolved tickets, Recently updated tickets, Current tasks, Overdue tasks, Pending tickets, Tickets with pending approvals…). Ces vues encombrent le sélecteur de vues côté agent, complexifient l'onboarding des nouveaux agents et masquent les vues utiles dans un menu trop long.
-        <br><br><strong>Action :</strong> Supprimer ou archiver les vues système non utilisées. Créer des vues dédiées par marque (Copernic, Space) pour isoler le trafic multi-brand. Viser 15-20 vues actives maximum.
-      </div>
-    </div>
+
   </div>
 </div>
 
@@ -604,10 +588,7 @@
           </table>
         </div>
 
-        <div class="alert alert-yellow">
-          <div class="alert-title">⚠ 31 vues inactives encombrent le compte</div>
-          <div class="alert-body">La moitié des vues sont des vues système Zendesk jamais utilisées ou personnalisées. Supprimer les vues inutiles, créer des vues par marque (Copernic, Space) et viser 15-20 vues actives maximum pour améliorer l'expérience agent.</div>
-        </div>
+
       </div>
 
       <div>
@@ -668,12 +649,12 @@
             <tbody>
               <tr><td>Hopem Client Support</td><td><span class="badge badge-green">Actif</span></td><td>✅ Oui</td></tr>
               <tr><td>Admin / Facturation</td><td><span class="badge badge-green">Actif</span></td><td>Non</td></tr>
-              <tr><td>Formulaire Space</td><td><span class="badge badge-red">Inactif ⚠</span></td><td>Non</td></tr>
+              <tr><td>Formulaire Space</td><td><span class="badge badge-gray">Inactif</span></td><td>Non</td></tr>
             </tbody>
           </table>
-          <div class="alert alert-orange" style="margin-top:10px;">
-            <div class="alert-title">⚠ Formulaire Space inactif</div>
-            <div class="alert-body">La marque Praeneste-Space est active mais son formulaire est désactivé. Les clients Space utilisent le formulaire Hopem par défaut, sans champs adaptés à leur produit.</div>
+          <div class="alert alert-blue" style="margin-top:10px;">
+            <div class="alert-title" style="font-size:11px;">💡 Formulaire Space inactif — à évaluer</div>
+            <div class="alert-body">Le formulaire Space est désactivé. Si le formulaire général Hopem couvre les besoins des clients Space, aucune action urgente n'est nécessaire. À évaluer avec l'équipe : des champs spécifiques à Space justifieraient l'activation d'un formulaire dédié.</div>
           </div>
         </div>
 
@@ -973,8 +954,7 @@
           <tbody>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">0 politique SLA : aucun engagement de délai mesurable pour un support B2B</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucun schedule (horaire de travail) : prérequis SLA absent</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire Space inactif alors que la marque Praeneste-Space est active</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">31 vues inactives sur 62 : vues système jamais utilisées ni personnalisées</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire Space inactif — à évaluer si un formulaire dédié est nécessaire selon les besoins spécifiques de la marque</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;"><strong>3 adresses email non fonctionnelles</strong> : support@praeneste.com, support@copernic.com, info@hopem.com — tickets jamais reçus par les agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">App "Select an address" absente : réponses multi-marque envoyées depuis l'adresse par défaut</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Pied de page email avec watermark Zendesk : image de marque non professionnelle</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
@@ -1051,7 +1031,7 @@
         <div class="card">
           <div class="section-label" style="color:#F97316;">🟠 Points importants (C2-C4)</div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C2]</strong> Supprimer ou corriger le trigger cassé ID 44070561790491 (agent + groupe inexistants)</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Activer le formulaire Space et ajouter les champs spécifiques Praeneste</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Évaluer si un formulaire Space dédié est utile (si le formulaire général suffit, aucune action requise)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C3]</strong> Recalibrer les critères de priorité pour ramener Urgent/High sous 15%</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Activer les notifications pending 24h et 5 jours</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Réduire Auto-Solve de 240 à 45 jours</span></div>
@@ -1061,7 +1041,6 @@
       <div>
         <div class="card" style="margin-bottom:10px;">
           <div class="section-label" style="color:#EAB308;">🟡 Améliorations (C5-C6)</div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Supprimer / archiver les 31 vues inactives, créer des vues par marque</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Installer l'app "Select an address" (Admin Center &gt; Apps) pour permettre aux agents de choisir l'adresse d'envoi selon la marque</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C4]</strong> Ajouter une automation de notification avant auto-résolution : prévenir le client X jours avant le passage automatique Pending → Résolu</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C5]</strong> Vérifier la configuration SPF, DKIM et DMARC pour l'adresse email support</span></div>
@@ -1161,7 +1140,7 @@
             </div>
             <div class="alert alert-indigo" style="margin-bottom:0;">
               <div class="alert-title">🚀 Multi-brand complet</div>
-              <div class="alert-body">Les 3 marques sont actives. Activer le formulaire Space, créer un HC dédié Copernic, et configurer des Workspaces par marque pour une expérience agent cohérente selon la marque traitée.</div>
+              <div class="alert-body">Les 3 marques sont actives. Évaluer l'opportunité d'un formulaire Space dédié, créer un HC pour Copernic, et configurer des Workspaces par marque pour une expérience agent cohérente selon la marque traitée.</div>
             </div>
           </div>
         </div>
