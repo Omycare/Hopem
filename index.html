@@ -232,6 +232,8 @@
         <div class="section-label">✗ Problèmes détectés</div>
         <ul class="check-list cross-list">
           <li><strong>Aucun domaine personnalisé</strong> : les 3 marques exposent l'URL zendesk.com par défaut, y compris depuis le site web principal</li>
+          <li><strong>App "Select an address" manquante</strong> : toutes les réponses partent de l'adresse Hopem par défaut, quelle que soit la marque du ticket</li>
+          <li><strong>Template email Hopem pour toutes les marques</strong> : les clients Copernic et Praeneste-Space reçoivent des emails avec le logo Hopem</li>
           <li><strong>0 politique SLA</strong> : aucun engagement de délai mesuré, rapports de performance inutilisables</li>
           <li><strong>Aucun horaire de travail (schedule)</strong> : prérequis indispensable au SLA, absent du compte</li>
           <li><strong>37% de tickets Urgent/High</strong> : taux anormalement élevé, possible surclassement automatique</li>
@@ -282,7 +284,7 @@
 <div class="slide" id="slide-3">
   <div class="slide-header">
     <h2>🔴 Urgences critiques : points prioritaires identifiés</h2>
-    <span class="sh-badge">2 URGENCES C1 · 1 URGENCE C2 · PRIORITÉ MAX</span>
+    <span class="sh-badge">2 URGENCES C1 · 3 URGENCES C2 · PRIORITÉ MAX</span>
   </div>
   <div class="slide-body">
     <div class="alert alert-red">
@@ -329,6 +331,24 @@
         </table>
         <br>Les clients qui écrivent à ces adresses ne reçoivent aucun accusé de réception et leur demande n'est jamais traitée. Impact direct sur le CSAT et la perception du service.
         <br><br><strong>Action immédiate :</strong> Vérifier dans Admin Center &gt; Canaux &gt; Email la configuration de chaque adresse (forwarding, DNS). Tester chaque adresse et corriger la connexion ou rediriger vers une adresse fonctionnelle.
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-title"><span class="badge badge-red">C2</span> App "Select an address" manquante : impact direct sur l'expérience client multi-brand</div>
+      <div class="alert-body">
+        Avec 3 marques et plusieurs adresses email distinctes (Hopem, Copernic, Praeneste), <strong>l'app "Select an address" est absente</strong>. Sans elle, chaque réponse agent part automatiquement de l'adresse email par défaut du compte, quelle que soit la marque du ticket. Un client Copernic reçoit une réponse depuis une adresse Hopem : incohérence de marque directement visible par le client.
+        <br><br>
+        <strong>Action immédiate :</strong> Installer l'app "Select an address" depuis le Marketplace Zendesk (Admin Center &gt; Apps et intégrations &gt; Marketplace).
+      </div>
+    </div>
+
+    <div class="alert alert-orange">
+      <div class="alert-title"><span class="badge badge-orange">C2</span> Template email Hopem utilisé pour les 3 marques</div>
+      <div class="alert-body">
+        Les emails envoyés pour les tickets Copernic et Praeneste-Space utilisent le <strong>template email et le logo Hopem</strong>. Les clients de ces marques reçoivent des notifications visuellement identifiées comme Hopem. Dans un compte multi-brand, chaque marque doit avoir son propre template email.
+        <br><br>
+        <strong>Action :</strong> Configurer un template email distinct par marque dans Admin Center &gt; Canaux &gt; Email &gt; Templates. Ajouter le logo Copernic et le logo Praeneste-Space selon la marque du ticket.
       </div>
     </div>
 
@@ -692,6 +712,26 @@
             </div>
           </div>
         </div>
+
+        <div class="card">
+          <div class="section-label">Apps installées <a href="https://hopem-55629.zendesk.com/admin/apps-integrations/apps/zendesk-support-apps" target="_blank" class="zd-link">↗ Apps</a></div>
+          <div class="tags" style="margin-bottom:10px;">
+            <span class="tag">Copilot Studio (Microsoft)</span>
+            <span class="tag">MP Dashboard Claude 1</span>
+            <span class="tag">Zendesk AI (natif)</span>
+            <span class="tag">Attachment Plus</span>
+            <span class="tag">Advanced Search</span>
+            <span class="tag" style="background:#FEF3C7;border-color:#FDE68A;color:#92400E;">Time Tracking ⚠ inactif</span>
+          </div>
+          <div class="alert alert-red" style="margin-bottom:8px;">
+            <div class="alert-title" style="font-size:11px;">🔴 App "Select an address" manquante</div>
+            <div class="alert-body">Avec 3 marques et plusieurs adresses email, l'app <strong>Select an address</strong> est indispensable : elle permet à l'agent de choisir l'adresse d'envoi (Hopem / Praeneste / Copernic) dans le composer. Sans cette app, toutes les réponses partent de l'adresse par défaut, quelle que soit la marque du ticket.</div>
+          </div>
+          <div class="alert alert-yellow" style="margin-bottom:0;">
+            <div class="alert-title" style="font-size:11px;">⚠ Pied de page email : watermark Zendesk</div>
+            <div class="alert-body">Le template email contient encore le watermark Zendesk dans le pied de page. À remplacer par les couleurs et la charte graphique Hopem pour une image de marque professionnelle.</div>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -761,31 +801,16 @@
             <div class="alert-title">🔴 3 adresses email non fonctionnelles</div>
             <div class="alert-body">support@praeneste.com · support@copernic.com · info@hopem.com sont connectées mais ne délivrent pas les tickets aux agents. Les clients écrivant à ces adresses ne reçoivent aucune réponse.</div>
           </div>
+          <div class="alert alert-orange" style="margin-top:8px;margin-bottom:8px;">
+            <div class="alert-title" style="font-size:11px;">🔴 Template email Hopem utilisé pour toutes les marques</div>
+            <div class="alert-body">Les tickets Copernic et Praeneste-Space reçoivent des réponses avec le <strong>logo et la charte graphique Hopem</strong>. Dans un compte multi-brand, chaque marque devrait avoir son propre template email (logo, couleurs, signature). À configurer dans Admin Center &gt; Canaux &gt; Email &gt; Templates par marque.</div>
+          </div>
           <div class="alert alert-blue" style="margin-top:8px;margin-bottom:0;">
             <div class="alert-title" style="font-size:11px;">📋 Vérifier la configuration email</div>
             <div class="alert-body">S'assurer que les enregistrements SPF, DKIM et DMARC sont correctement configurés pour l'adresse support@hopem.ca (ou équivalent). Une mauvaise configuration email réduit la délivrabilité des notifications clients.</div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="section-label">Apps installées <a href="https://hopem-55629.zendesk.com/admin/apps-integrations/apps/zendesk-support-apps" target="_blank" class="zd-link">↗ Apps</a></div>
-          <div class="tags" style="margin-bottom:10px;">
-            <span class="tag">Copilot Studio (Microsoft)</span>
-            <span class="tag">MP Dashboard Claude 1</span>
-            <span class="tag">Zendesk AI (natif)</span>
-            <span class="tag">Attachment Plus</span>
-            <span class="tag">Advanced Search</span>
-            <span class="tag" style="background:#FEF3C7;border-color:#FDE68A;color:#92400E;">Time Tracking ⚠ inactif</span>
-          </div>
-          <div class="alert alert-red" style="margin-bottom:8px;">
-            <div class="alert-title" style="font-size:11px;">🔴 App "Select an address" manquante</div>
-            <div class="alert-body">Avec 3 marques et plusieurs adresses email, l'app <strong>Select an address</strong> est indispensable : elle permet à l'agent de choisir l'adresse d'envoi (Hopem / Praeneste / Copernic) dans le composer. Sans cette app, toutes les réponses partent de l'adresse par défaut, quelle que soit la marque du ticket.</div>
-          </div>
-          <div class="alert alert-yellow" style="margin-bottom:0;">
-            <div class="alert-title" style="font-size:11px;">⚠ Pied de page email : watermark Zendesk</div>
-            <div class="alert-body">Le template email contient encore le watermark Zendesk dans le pied de page. À remplacer par les couleurs et la charte graphique Hopem pour une image de marque professionnelle.</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -959,7 +984,8 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Aucun schedule (horaire de travail) : prérequis SLA absent</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Formulaire Space inactif : à évaluer si un formulaire dédié est nécessaire selon les besoins spécifiques de la marque</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;"><strong>3 adresses email non fonctionnelles</strong> : support@praeneste.com, support@copernic.com, info@hopem.com : tickets jamais reçus par les agents</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">App "Select an address" absente : réponses multi-marque envoyées depuis l'adresse par défaut</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;"><strong>App "Select an address" absente</strong> : réponses envoyées depuis l'adresse Hopem par défaut pour toutes les marques</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-red">Critique</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Template email Hopem utilisé pour Copernic et Praeneste-Space : logo et charte incorrects pour ces marques</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-orange">Important</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Pied de page email avec watermark Zendesk : image de marque non professionnelle</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">SPF / DKIM / DMARC : délivrabilité email à vérifier</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#166534;">Architecture multi-brand cohérente : 3 marques, 9 groupes</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-green">OK</span></td></tr>
