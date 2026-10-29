@@ -567,25 +567,27 @@
         <div class="card" style="margin-bottom:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
             <div class="section-label" style="margin:0;">Vues : 62 total <a href="https://hopem-55629.zendesk.com/admin/workspaces/agent-workspace/views" target="_blank" class="zd-link">↗ Vues</a></div>
-            <div style="display:flex;gap:5px;"><span class="badge badge-green">31 ON</span><span class="badge badge-red">31 OFF</span></div>
+            <div style="display:flex;gap:5px;"><span class="badge badge-green">31 ON</span><span class="badge badge-gray">31 OFF</span></div>
           </div>
           <table>
             <thead><tr><th>Vue active</th><th>Type</th></tr></thead>
             <tbody>
-              <tr class="tcat"><td colspan="2">VUES OPÉRATIONNELLES</td></tr>
+              <tr class="tcat"><td colspan="2">EXEMPLES DE VUES ACTIVES</td></tr>
               <tr><td>Expérience Client :: Reception</td><td><span class="badge badge-blue">Supervision</span></td></tr>
               <tr><td>Hopem Manager</td><td><span class="badge badge-purple">Manager</span></td></tr>
               <tr><td>À traiter Primmo logiciel</td><td><span class="badge badge-orange">Produit</span></td></tr>
               <tr><td>À traiter Primmo technique</td><td><span class="badge badge-orange">Produit</span></td></tr>
-              <tr class="tcat"><td colspan="2">VUES SYSTÈME INACTIVES (à supprimer)</td></tr>
-              <tr><td style="color:#9CA3AF;">All unsolved tickets</td><td><span class="badge badge-gray">Système</span></td></tr>
-              <tr><td style="color:#9CA3AF;">Recently updated tickets</td><td><span class="badge badge-gray">Système</span></td></tr>
-              <tr><td style="color:#9CA3AF;">Current tasks / Overdue tasks</td><td><span class="badge badge-gray">Système</span></td></tr>
-              <tr><td style="color:#9CA3AF;">Pending tickets</td><td><span class="badge badge-gray">Système</span></td></tr>
-              <tr><td style="color:#9CA3AF;">Tickets with pending approvals</td><td><span class="badge badge-gray">Système</span></td></tr>
-              <tr><td style="color:#9CA3AF;">New tickets in your groups</td><td><span class="badge badge-gray">Système</span></td></tr>
+              <tr class="tcat"><td colspan="2">VUES UTILES À CRÉER</td></tr>
+              <tr><td style="color:#374151;">📋 Tickets non assignés</td><td><span class="badge badge-yellow">Manquant</span></td></tr>
+              <tr><td style="color:#374151;">🕐 Recently updated</td><td><span class="badge badge-yellow">Manquant</span></td></tr>
+              <tr><td style="color:#374151;">🔴 High priority</td><td><span class="badge badge-yellow">Manquant</span></td></tr>
+              <tr><td style="color:#374151;">⏱ SLA breach</td><td><span class="badge badge-gray">Post-SLA</span></td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="alert alert-indigo" style="margin-bottom:0;">
+          <div class="alert-title">💡 Vues : structure correcte, quelques ajouts recommandés</div>
+          <div class="alert-body">La configuration des vues est globalement bien faite. Pour compléter le dispositif : ajouter une vue <strong>tickets non assignés</strong> (indispensable pour détecter les tickets sans agent), une vue <strong>recently updated</strong> et une vue <strong>high priority</strong>. Une vue <strong>SLA breach</strong> sera utile une fois les SLA configurés. Ajouter des emojis aux noms de vues améliore la lisibilité dans la barre latérale agent.</div>
         </div>
 
 
@@ -1005,7 +1007,7 @@
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Articles avec captures d'écran sans texte : non exploitables par l'IA</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Help Center : branding Zendesk non supprimé, mise en page dupliquée (Guide center name actif)</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Explore : aucun dashboard personnalisé, aucun rapport sur statuts ou champs personnalisés</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
-            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Vues : pas d'emojis pour identifier rapidement les files par marque ou type</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
+            <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Vues bien structurées — ajouter : tickets non assignés, recently updated, high priority, SLA breach (post-SLA) + emojis pour la lisibilité</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Web Widget / Messaging : présence et configuration à confirmer</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">Apps : Time Tracking désactivé, liste complète à auditer, désinstaller les apps inutilisées</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-gray">Optimisation</span></td></tr>
             <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:5px 6px;color:#374151;">14 statuts personnalisés : "Approuvé - en attente facturation" et "Terminé - envoyé en facturation" à recatégoriser en On-Hold, et volume à valider avec l'équipe</td><td style="padding:5px 6px;text-align:center;"><span class="badge badge-yellow">Moyen</span></td></tr>
@@ -1063,7 +1065,7 @@
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Créer des dashboards Explore personnalisés (SLA, CSAT, volume par statut personnalisé et par champ métier)</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C8]</strong> Unifier les triggers de routage : remplacer les triggers par gamme par 1 trigger par type de demande avec condition multi-gamme</span></div>
           <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Configurer un AI Agent Chat pour la résolution autonome des demandes simples</span></div>
-          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Ajouter des emojis aux vues pour identifier rapidement les files par marque et type</span></div>
+          <div class="check-row"><input type="checkbox" class="task-cb"><span class="cb-text"><strong>[C9]</strong> Créer les vues manquantes : tickets non assignés, recently updated, high priority, SLA breach (une fois les SLA actifs) — ajouter des emojis aux noms de vues pour la lisibilité</span></div>
         </div>
       </div>
     </div>
