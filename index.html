@@ -1107,74 +1107,190 @@
     <span class="sh-badge">6 OPPORTUNITÉS · IMPACT ÉLEVÉ</span>
   </div>
   <div class="slide-body">
-    <div class="grid grid-2" style="gap:14px;">
-      <div>
-        <div class="card" style="margin-bottom:10px;">
+
+    <!-- TOP : 2 colonnes -->
+    <div class="grid grid-2" style="gap:14px;margin-bottom:14px;">
+
+      <!-- COL GAUCHE : Flux + CSAT -->
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="flex:1;">
           <div class="section-label">Flux ticket entrant recommandé</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:12px;line-height:1.8;color:var(--text-mid);">
-            <div>1. 📥 Ticket créé (email / web / voix / chat)</div>
-            <div>2. 🤖 Tri IA → langue + intention + sentiment détectés automatiquement</div>
-            <div>3. 🏷️ Tag produit (Primmo / Space / Copernic / Abak / SyMo…)</div>
-            <div>4. 🔀 Trigger de routage → groupe correspondant (Technique ou Logiciels)</div>
-            <div>5. 📊 SLA déclenché selon priorité + schedule heures ouvrées</div>
-            <div>6. 👤 Assignation agent → statut "À traiter - assigné"</div>
-            <div>7. ✅ Résolution → CSAT automatique → clôture 4 jours après</div>
+          <p style="font-size:11px;color:#9CA3AF;margin:4px 0 10px;line-height:1.5;">Ce flux décrit le cycle de vie idéal d'un ticket, de sa création à sa clôture. Il sert de référence pour identifier les étapes manquantes et prioriser les actions à mettre en place.</p>
+          <div style="display:flex;flex-direction:column;gap:7px;font-size:11.5px;">
+
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="color:#22C55E;font-weight:700;flex-shrink:0;">✓</span>
+              <div>
+                <span style="color:var(--text-hi);">📥 Ticket créé</span>
+                <span style="color:#9CA3AF;">. Email, Web Widget, voix, chat : tous les canaux sont actifs.</span>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="color:#22C55E;font-weight:700;flex-shrink:0;">✓</span>
+              <div>
+                <span style="color:var(--text-hi);">🤖 Tri IA automatique</span>
+                <span style="color:#9CA3AF;">. Langue, intention et sentiment détectés. 971 tickets avec confidence haute : la base fonctionne bien.</span>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="color:#F59E0B;font-weight:700;flex-shrink:0;">⚠</span>
+              <div>
+                <span style="color:var(--text-hi);">🏷️ Tag produit automatique</span>
+                <span style="color:#9CA3AF;">. Des tags existent (primmo, space…) mais ne sont pas systématiquement posés par trigger. À consolider.</span>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="color:#F59E0B;font-weight:700;flex-shrink:0;">⚠</span>
+              <div>
+                <span style="color:var(--text-hi);">🔀 Trigger de routage vers le bon groupe</span>
+                <span style="color:#9CA3AF;">. Un trigger cassé (ID 44070561790491) et une condition ANY au lieu de ALL fragilisent le routage actuel.</span>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="color:#EF4444;font-weight:700;flex-shrink:0;">✗</span>
+              <div>
+                <span style="color:var(--text-hi);">📊 SLA déclenché selon la priorité</span>
+                <span style="color:#9CA3AF;">. Aucune politique SLA définie. Sans SLA, impossible de mesurer ou garantir les délais de réponse.</span>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="color:#22C55E;font-weight:700;flex-shrink:0;">✓</span>
+              <div>
+                <span style="color:var(--text-hi);">👤 Assignation agent avec notification</span>
+                <span style="color:#9CA3AF;">. Les triggers de notification d'assignation sont actifs. Les statuts personnalisés couvrent bien le workflow.</span>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="color:#22C55E;font-weight:700;flex-shrink:0;">✓</span>
+              <div>
+                <span style="color:var(--text-hi);">✅ Résolution → CSAT → clôture automatique</span>
+                <span style="color:#9CA3AF;">. CSAT actif (91%) et auto-clôture en place. Le cycle se ferme correctement.</span>
+              </div>
+            </div>
+
+          </div>
+          <div style="margin-top:10px;font-size:10px;color:#6B7280;border-top:1px solid rgba(255,255,255,.06);padding-top:8px;">
+            ✓ Actif · ⚠ Partiel / à corriger · ✗ Absent
           </div>
         </div>
 
         <div class="card">
           <div class="section-label">CSAT : Capital à exploiter</div>
-          <div style="text-align:center;padding:16px 0;">
-            <div style="font-size:48px;font-weight:800;color:#22C55E;">91%</div>
-            <div style="font-size:12px;color:#6B7280;margin-top:4px;">1 782 avis positifs · 178 négatifs</div>
+          <div style="display:flex;align-items:center;gap:16px;margin-top:8px;">
+            <div style="text-align:center;flex-shrink:0;">
+              <div style="font-size:42px;font-weight:800;color:#22C55E;line-height:1;">91%</div>
+              <div style="font-size:10px;color:#6B7280;margin-top:2px;">1 782 bons · 178 mauvais</div>
+            </div>
+            <div style="flex:1;">
+              <div style="height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:8px;"><div style="height:100%;width:91%;background:#22C55E;border-radius:99px;"></div></div>
+              <p style="font-size:11px;color:#9CA3AF;line-height:1.5;">Score remarquable pour un support logiciel B2B. Pistes : suivi structuré des 9% insatisfaits pour identifier les patterns récurrents, et témoignages clients à valoriser.</p>
+            </div>
           </div>
-          <div style="height:8px;border-radius:99px;background:#E5E7EB;overflow:hidden;margin:8px 0;"><div style="height:100%;width:91%;background:#22C55E;border-radius:99px;"></div></div>
-          <p style="font-size:11px;color:#6B7280;margin-top:8px;line-height:1.6;">Score remarquable pour un support logiciel B2B. À exploiter : programme de suivi des 9% insatisfaits pour identifier les patterns récurrents, et témoignages clients à publier.</p>
         </div>
       </div>
 
+      <!-- COL DROITE : 5 opportunités -->
       <div>
-        <div class="card">
-          <div class="section-label">6 opportunités à fort impact</div>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
-            <div class="alert alert-purple" style="margin-bottom:0;background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.4);">
-              <div class="alert-title" style="color:#C4B5FD;">🤖 Triggers Intent → Type de demande (dato validé API)</div>
-              <div class="alert-body">Analyse de 971 tickets avec intent_confidence__high : des corrélations fortes permettent d'automatiser la saisie du champ <em>Type de demande</em> via triggers. Réduction du travail agent et meilleur reporting.
-                <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:10px;">
-                  <div style="color:#86EFAC;">★ new_order_placed → Expérience client</div><div style="color:#86EFAC;">86% · 385 tickets</div>
-                  <div style="color:#86EFAC;">★ cant_login → Assistance technique</div><div style="color:#86EFAC;">81% · 108 tickets</div>
-                  <div style="color:#86EFAC;">★ password_reset → Assistance technique</div><div style="color:#86EFAC;">86% · 44 tickets</div>
-                  <div style="color:#86EFAC;">★ does_software_do → Assistance logiciels</div><div style="color:#86EFAC;">90% · 21 tickets</div>
-                  <div style="color:#86EFAC;">★ cancel_payment → Assistance logiciels</div><div style="color:#86EFAC;">100% · 9 tickets</div>
-                  <div style="color:#86EFAC;">★ how_to_use → Assistance logiciels</div><div style="color:#86EFAC;">100% · 9 tickets</div>
-                </div>
-                <div style="margin-top:6px;font-size:10px;color:rgba(255,255,255,.5);">Condition : tag intent_confidence__high présent · Action : remplir le champ Type de demande</div>
-              </div>
-            </div>
+        <div class="card" style="height:100%;">
+          <div class="section-label">5 opportunités à fort impact</div>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px;">
+
             <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-title">🚀 GenAI pour tickets répétitifs</div>
-              <div class="alert-body">Activer les automations IA pour résoudre automatiquement les demandes simples (réinitialisations, demandes de documentation, FAQ). Potentiel : réduire le volume humain de 15-25% sur les tickets Primmo courants.</div>
+              <div class="alert-title">🚀 Résolution autonome GenAI (AI Agent)</div>
+              <div class="alert-body">Aucun AI Agent n'est configuré. Activer la résolution autonome sur les demandes simples (réinitialisations, questions FAQ, demandes de documentation) permettrait de traiter 15 à 25% du volume sans intervention humaine, notamment sur les tickets Primmo courants.</div>
             </div>
+
             <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-title">🚀 Self-service HC : déflexion intelligente</div>
-              <div class="alert-body">Avec 25 articles publiés et le tri IA actif, activer la suggestion automatique d'articles avant soumission de ticket. Le Help Center peut absorber les demandes de type "comment utiliser Primmo-GL" sans intervention agent. Publier en priorité les 37 brouillons existants pour maximiser la déflexion.</div>
+              <div class="alert-title">🚀 Self-service HC : déflexion avant ticket</div>
+              <div class="alert-body">Avec le tri IA actif et 25 articles publiés, activer la suggestion automatique d'articles au moment de la soumission du ticket. Publier les 37 brouillons existants en priorité pour maximiser la déflexion sur les questions récurrentes (ex. "comment utiliser Primmo-GL").</div>
             </div>
+
             <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-title">🚀 Dashboard SLA temps réel</div>
-              <div class="alert-body">Une fois les SLA configurés, un dashboard Explore permet de piloter les engagements client et identifier les goulots d'étranglement par groupe et par produit en temps réel.</div>
+              <div class="alert-title">🚀 Dashboard SLA temps réel dans Explore</div>
+              <div class="alert-body">Une fois les SLA configurés (action prioritaire), un dashboard Explore permet de piloter les engagements client et d'identifier les goulots d'étranglement par groupe et par produit, en temps réel.</div>
             </div>
+
             <div class="alert alert-indigo" style="margin-bottom:0;">
-              <div class="alert-title">🚀 Skills-based routing</div>
-              <div class="alert-body">Avec 9 groupes et 41 agents, configurer le routage par compétences permettrait une distribution plus fine : niveau 1/2/3, expert par module logiciel (GL, CF, IMM, Space…).</div>
+              <div class="alert-title">🚀 Routage par compétences (skills-based routing)</div>
+              <div class="alert-body">Avec 9 groupes et 41 agents, configurer le routage par compétences permettrait une distribution plus fine : niveau 1/2/3, expert par module logiciel (GL, CF, IMM, Space…). Réduit les réassignations et le temps de résolution.</div>
             </div>
+
             <div class="alert alert-indigo" style="margin-bottom:0;">
               <div class="alert-title">🚀 Multi-brand complet</div>
-              <div class="alert-body">Les 3 marques sont actives. Évaluer l'opportunité d'un formulaire Space dédié, créer un HC pour Copernic, et configurer des Workspaces par marque pour une expérience agent cohérente selon la marque traitée.</div>
+              <div class="alert-body">Mapper les domaines personnalisés des 3 marques, renommer le formulaire "Space", créer un HC pour Copernic, et configurer des Workspaces par marque pour une expérience agent cohérente selon la marque traitée.</div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
+
+    <!-- BAS : Analyse corrélation Intent → Type de demande (pleine largeur) -->
+    <div style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:16px 20px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="font-size:14px;font-weight:700;color:#C4B5FD;">🤖 Automatisation : Intent → Type de demande (validé sur 971 tickets API)</div>
+        <div style="margin-left:auto;font-size:11px;color:#9CA3AF;white-space:nowrap;">Condition : tag <code style="background:rgba(255,255,255,.08);padding:1px 6px;border-radius:4px;color:#E9D5FF;">intent_confidence__high</code> présent</div>
+      </div>
+      <p style="font-size:12px;color:#9CA3AF;margin-bottom:12px;line-height:1.5;">Le champ <em>Type de demande</em> est rempli manuellement par les agents. En analysant les 971 tickets où l'IA a détecté une intention avec haute confiance, 6 corrélations stables ont été identifiées. Configurer ces triggers permettrait de pré-remplir automatiquement le champ, réduisant la charge de saisie et améliorant la cohérence du reporting.</p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(139,92,246,.4);">
+              <th style="text-align:left;padding:7px 12px;color:#8B5CF6;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Intention IA détectée</th>
+              <th style="text-align:left;padding:7px 12px;color:#8B5CF6;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Type de demande à remplir</th>
+              <th style="text-align:center;padding:7px 12px;color:#8B5CF6;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Fiabilité</th>
+              <th style="text-align:center;padding:7px 12px;color:#8B5CF6;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Volume</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.05);">
+              <td style="padding:8px 12px;color:#E9D5FF;font-family:monospace;font-size:12px;">new_order_placed</td>
+              <td style="padding:8px 12px;color:var(--text-hi);">Expérience client</td>
+              <td style="padding:8px 12px;text-align:center;"><span style="background:#166534;color:#86EFAC;padding:2px 8px;border-radius:99px;font-weight:700;font-size:11.5px;">86%</span></td>
+              <td style="padding:8px 12px;text-align:center;color:#9CA3AF;font-weight:600;">385 tickets</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.05);">
+              <td style="padding:8px 12px;color:#E9D5FF;font-family:monospace;font-size:12px;">cant_login</td>
+              <td style="padding:8px 12px;color:var(--text-hi);">Assistance technique</td>
+              <td style="padding:8px 12px;text-align:center;"><span style="background:#166534;color:#86EFAC;padding:2px 8px;border-radius:99px;font-weight:700;font-size:11.5px;">81%</span></td>
+              <td style="padding:8px 12px;text-align:center;color:#9CA3AF;font-weight:600;">108 tickets</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.05);">
+              <td style="padding:8px 12px;color:#E9D5FF;font-family:monospace;font-size:12px;">password_reset</td>
+              <td style="padding:8px 12px;color:var(--text-hi);">Assistance technique</td>
+              <td style="padding:8px 12px;text-align:center;"><span style="background:#166534;color:#86EFAC;padding:2px 8px;border-radius:99px;font-weight:700;font-size:11.5px;">86%</span></td>
+              <td style="padding:8px 12px;text-align:center;color:#9CA3AF;font-weight:600;">44 tickets</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.05);">
+              <td style="padding:8px 12px;color:#E9D5FF;font-family:monospace;font-size:12px;">does_software_do</td>
+              <td style="padding:8px 12px;color:var(--text-hi);">Assistance logiciels</td>
+              <td style="padding:8px 12px;text-align:center;"><span style="background:#14532D;color:#86EFAC;padding:2px 8px;border-radius:99px;font-weight:700;font-size:11.5px;">90%</span></td>
+              <td style="padding:8px 12px;text-align:center;color:#9CA3AF;font-weight:600;">21 tickets</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.05);">
+              <td style="padding:8px 12px;color:#E9D5FF;font-family:monospace;font-size:12px;">cancel_payment</td>
+              <td style="padding:8px 12px;color:var(--text-hi);">Assistance logiciels</td>
+              <td style="padding:8px 12px;text-align:center;"><span style="background:#052e16;color:#4ADE80;padding:2px 8px;border-radius:99px;font-weight:700;font-size:11.5px;">100%</span></td>
+              <td style="padding:8px 12px;text-align:center;color:#9CA3AF;font-weight:600;">9 tickets</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px;color:#E9D5FF;font-family:monospace;font-size:12px;">how_to_use</td>
+              <td style="padding:8px 12px;color:var(--text-hi);">Assistance logiciels</td>
+              <td style="padding:8px 12px;text-align:center;"><span style="background:#052e16;color:#4ADE80;padding:2px 8px;border-radius:99px;font-weight:700;font-size:11.5px;">100%</span></td>
+              <td style="padding:8px 12px;text-align:center;color:#9CA3AF;font-weight:600;">9 tickets</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:#6B7280;">Action : créer 6 triggers Zendesk avec condition <code style="background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px;color:#C4B5FD;">tag contient intent_confidence__high</code> + intention correspondante → remplir automatiquement le champ "Type de demande".</div>
+    </div>
+
   </div>
 </div>
 
